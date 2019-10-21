@@ -7,6 +7,10 @@
     
 }
 
+.navMargin{
+  margin-top: -3em;
+}
+
 .imgSlide {
     max-height: 80vh;
     width: 100%;
@@ -206,7 +210,7 @@ h3{
 
 .filtroI{
   margin: 0 .5em ;
-}
+ }
 
 .imgFilme{
   min-width: 250px;

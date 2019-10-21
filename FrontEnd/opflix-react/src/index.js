@@ -1,4 +1,4 @@
-//BIBLIOTECAS
+// BIBLIOTECAS
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -6,12 +6,18 @@ import ReactDOM from 'react-dom';
 import NaoEncontrado from './pages/NaoEncontrado/NaoEncontrado.js'
 import Login from './pages/Login/Login.js';
 import Home from './pages/Home/App.js';
+import DashboardAdmin from './pages/Dashboard/Dashboard.js';
 
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-//ROTAS 
+// SERVICES
+import { parseJwt } from './services/autorizacao.js';
+
+// ROTAS 
 import { Route, Link, BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
+
+// --------------------------------------------------------
 
 const RotaPrivada = ({ component: Component }) => (
     <Route
@@ -27,12 +33,28 @@ const RotaPrivada = ({ component: Component }) => (
     />
 )
 
+const PermissaoAdmin = ({ component: Component }) => (
+    <Route
+        render={
+            props =>
+                //Admin
+
+                parseJwt().perm === "Admin" ? (
+                    <DashboardAdmin {...props} />
+                    ) : (
+                        <Route component={NaoEncontrado} />
+                    )
+        }
+    />
+);
+
 const routing = (
     <Router>
         <div>
             <Switch>
                 <Route exact path='/' component={Login} />
                 <RotaPrivada path='/home' component={Home} />
+                <PermissaoAdmin path='/dashboard' component={DashboardAdmin} />
                 <Route component={NaoEncontrado} />
             </Switch>
         </div>

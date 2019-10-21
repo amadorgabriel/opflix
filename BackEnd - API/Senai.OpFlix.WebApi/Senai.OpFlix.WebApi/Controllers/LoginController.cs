@@ -54,6 +54,7 @@ namespace Senai.OpFlix.WebApi.Controllers
 
                 var claims = new[] //é p css do nosso token, pôh ele estiliza a parada toda
                 {
+                    new Claim("perm", permisaoUser),
                     new Claim(JwtRegisteredClaimNames.Email, userReturn.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, userReturn.IdUsuario.ToString()),
                     new Claim(ClaimTypes.Role, permisaoUser),

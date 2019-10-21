@@ -6,9 +6,14 @@ import Axios from 'axios';
 import '../../assets/css/globalStyle.css';
 import '../../assets/css/sessionStyle.css';
 
+// SERVICES
+import { parseJwt } from '../../services/autorizacao';
+
+
 // COMPONENTES
 import Navbar from '../../components/NavBarSession';
 import Footer from '../../components/Footer.js';
+import { runInThisContext } from 'vm';
 
 export default class Login extends Component {
 
@@ -76,7 +81,21 @@ export default class Login extends Component {
                     // console.log(data.data.token);
 
                     localStorage.setItem("usuario-opflix", data.data.token);
-                    this.props.history.push('home');
+                    
+                    var token = localStorage.getItem("usuario-opflix").split('.');
+                    var base64Url = token[1];
+                    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                    var tokenJSON = JSON.parse(window.atob(base64) );
+                    var permToken = (tokenJSON.perm)
+
+                    console.log(permToken)
+
+                    if (permToken == 'Admin') {
+                        this.props.history.push('dashboard');
+                    }else{   
+                        this.props.history.push('home');
+                    }
+
                     //console.log(this.props.history.location.pathname );
                 }
             })
