@@ -1,0 +1,40 @@
+.div{
+    position: absolute;
+    top: 40%;
+    left: 38%;
+    font-size: 25px;
+    border: 2px solid #ccc ;
+    padding: 2em;
+    border-radius: 5px;
+    box-shadow: 8px 8px 1px #ccc;
+    border-image: linear-gradient(to top left, black, gray);
+    border-image-slice: 1;
+    animation: bordas 5s infinite;
+}
+
+.div:hover{
+    color: rgb(59, 59, 59);
+    border-image: linear-gradient(to top bottom, black, gray);
+    border-image-slice: 1;
+    background-color: rgb(236, 235, 235);
+}
+
+@keyframes bordas{
+    /* from{
+        position: absolute;
+        top: 40%;
+        left: 38%;  
+    }
+    
+    to{
+        position: absolute;
+        top: 40%;
+        left: 50%;
+    } */
+
+    0% { position: absolute; top: 40%; left: 10% ;}
+    25% { position: absolute; top: 70%; left: 40% ;}
+    50% { position: absolute; top: 40%; left: 70% ;}
+    75% { position: absolute; top: 10%; left: 40% ;}
+    100% { position: absolute; top: 40%; left: 10% ;}
+}

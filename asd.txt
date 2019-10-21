@@ -1,0 +1,12 @@
+Desautorizei 
+	ListarPorCategorias
+
+Preciso Criar
+	Pagina quando não houver lançamentos do tipo ou nao tem favoritos
+	Filtro Favoritos
+
+--------------------------------
+
+	Listar Categorias e Plataformas nos Lançamento
+	Criar Pg caso não houver lanç favoritos ou por categorias
+	Criar Carrousel Recat

@@ -1,0 +1,42 @@
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.deps.json
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.runtimeconfig.json
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.runtimeconfig.dev.json
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.dll
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.csprojAssemblyReference.cache
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.csproj.CoreCompileInputs.cache
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.RazorAssemblyInfo.cache
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.RazorAssemblyInfo.cs
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.AssemblyInfoInputs.cache
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.AssemblyInfo.cs
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.RazorTargetAssemblyInfo.cache
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.pdb
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.dll
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.pdb
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.deps.json
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.runtimeconfig.json
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.runtimeconfig.dev.json
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.dll
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.pdb
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.csprojAssemblyReference.cache
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.csproj.CoreCompileInputs.cache
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.RazorAssemblyInfo.cache
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.RazorAssemblyInfo.cs
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.AssemblyInfoInputs.cache
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.AssemblyInfo.cs
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.RazorTargetAssemblyInfo.cache
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.dll
+C:\Users\Family\Documents\Gabriel Rodrigues Amador\SENAI\2Termo\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.pdb
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.deps.json
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.runtimeconfig.json
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.runtimeconfig.dev.json
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.dll
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\bin\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.pdb
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.csprojAssemblyReference.cache
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.csproj.CoreCompileInputs.cache
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.RazorAssemblyInfo.cache
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.RazorAssemblyInfo.cs
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.AssemblyInfoInputs.cache
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.AssemblyInfo.cs
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.RazorTargetAssemblyInfo.cache
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.dll
+C:\Users\44680781890\Documents\Gabriel Amador - 2T\2 Termo\JS\2s2019-sprint-1-bd-opflix\BackEnd - API\Senai.OpFlix.WebApi\Senai.OpFlix.WebApi\obj\Debug\netcoreapp2.1\Senai.OpFlix.WebApi.pdb

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard - Admin</title>
+    <link rel="shortcut icon" href="./img/favicon.png" />
+    <link rel="stylesheet" href="./css/globalStyle.css">
+    <link rel="stylesheet" href="./css/dashboarStyle.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul id="ulMenu">
+                <div class="divLogo">
+                    <a href="#"><img src="https://fontmeme.com/permalink/191006/a6304700a0ff79b62a628296fdcbe966.png"
+                            alt="netflix-font" class="logo" border="0"></a>
+                    <p>Lançamentos de Fimes e Séries</p>
+                </div>
+                <div class="divMenu">
+                    <li class="li"><a href="./index.html">Home</a></li>
+                    <li class="li"><a href="./">Dashboard</a></li>
+                    <li class="li logout">
+                        <p> Admin </p>
+                        <img src="./img/perfil.jpg" class="thumbnail" alt="perfilImg">
+                    </li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article class="warning">
+            <p>BEM VINDO Administrador! | @Nome Usuário</p>
+        </article>
+
+        <section class="Lancamentos">
+            <h1 class="h1">Lançamentos Count()</h1>
+
+            <section class="cadastrarL">
+
+                <div class="div1">
+                    <h2 class="h2">Cadastrar</h2>
+                    <input class="inputIdLan" type="number" placeholder="IdLanç..">
+                </div>
+
+                <form class="formCad" action="">
+                    <input required class="input" placeholder="Titulo.." type="text">
+                    <input required class="input" placeholder="Sinopse.." type="text">
+                    <input required class="input" placeholder="Duração.." type="text">
+                    <input required class="input" placeholder="Data Laçamento.." type="date">
+
+                    <select class="input" name="categoriasSel">
+                        <option required value="" selected disabled>Categoria: </option>
+                    </select>
+                    <select class="input" name="plataformasSel">
+                        <option value="" selected disabled>Plataforma: </option>
+                    </select>
+
+                    <div class="divBtn">
+                        <button class="inputGlobal btnCad"> Cadastrar </button>
+                        <div>Ou</div>
+                        <button class="inputGlobal btnAtu"> Atualizar </button>
+                    </div>
+
+                </form>
+            </section>
+
+            <section class="cadastrarL">
+                <div class="div1">
+                    <h2 class="h2">Listar</h2>
+                </div>
+
+                <table class="w3-table-all w3-hoverable">
+                    <thead>
+                        <tr class="w3-light-grey">
+                            <th>#IdL</th>
+                            <th>Titulo</th>
+                            <th>Lançamento</th>
+                            <th>Sinopse</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>1</td>
+                        <td>Smith</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td><button class="btnDel">Deletar</button></td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jackson</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td><button class="btnDel">Deletar</button></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Johnson</td>
+                        <td>67</td>
+                        <td>94</td>
+                        <td><button class="btnDel">Deletar</button></td>
+                    </tr>
+                </table>
+            </section>
+        </section>
+
+
+        <section class="Lancamentos">
+            <h2 class="h1">Categorias Count()</h2>
+
+            <section class="cadastrarL">
+                <div class="div1">
+                    <h2 class="h2">Cadastrar</h2>
+                    <input class="inputIdLan" type="number" placeholder="IdCat..">
+                </div>
+
+                <form class="formCad" action="">
+                    <input required class="input" placeholder="Nome.." type="text">
+
+                    <div class="divBtn">
+                        <button class="inputGlobal btnCad"> Cadastrar </button>
+                        <div>Ou</div>
+                        <button class="inputGlobal btnAtu"> Atualizar </button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="cadastrarL">
+                <div class="div1">
+                    <h2 class="h2">Listar</h2>
+                </div>
+
+                <table class="w3-table-all w3-hoverable">
+                    <thead>
+                        <tr class="w3-light-grey">
+                            <th>#IdC</th>
+                            <th>Nome</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>1</td>
+                        <td>Smith</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jackson</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Johnson</td>
+                    </tr>
+                </table>
+
+            </section>
+        </section>
+
+        <section class="Lancamentos">
+            <h2 class="h1">Plataformas Count()</h2>
+
+            <section class="cadastrarL">
+                <div class="div1">
+                    <h2 class="h2">Cadastrar</h2>
+                    <input class="inputIdLan" type="number" placeholder="IdP..">
+                </div>
+
+                <form class="formCad" action="">
+                    <input required class="input" placeholder="Nome.." type="text">
+
+                    <div class="divBtn">
+                        <button class="inputGlobal btnCad"> Cadastrar </button>
+                        <div>Ou</div>
+                        <button class="inputGlobal btnAtu"> Atualizar </button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="cadastrarL">
+                <div class="div1">
+                    <h2 class="h2">Listar</h2>
+                </div>
+
+                <table class="w3-table-all w3-hoverable">
+                    <thead>
+                        <tr class="w3-light-grey">
+                            <th>#IdP</th>
+                            <th>Nome</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>1</td>
+                        <td>Smith</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jackson</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Johnson</td>
+                    </tr>
+                </table>
+            </section>
+        </section>
+
+        <section class="Lancamentos">
+            <h2 class="h1">Usuarios Count()</h2>
+
+            <section class="cadastrarL">
+                <div class="div1">
+                    <h2 class="h2">Cadastrar Administrador</h2>
+                </div>
+
+                <form class="formCad" action="">
+                    <input required class="input" placeholder="Nome.." type="text">
+                    <input required class="input" placeholder="Email.." type="email">
+                    <input required class="input" placeholder="Senha.." type="password">
+                    <input required class="input" placeholder="Foto perfil: URL.." type="text">
+
+                    <div class="divBtn">
+                        <button class="inputGlobal btnCad"> Cadastrar </button>
+                    </div>
+                </form>
+            </section>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div>
+            <p>Contato FAQ: +55 (11) 2545-0459</p>
+            <P>Todos direitos Reservados</P>
+        </div>
+        <img class="logo" src="https://fontmeme.com/permalink/191006/a6304700a0ff79b62a628296fdcbe966.png">
+    </footer>
+</body>
+
+</html>

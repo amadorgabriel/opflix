@@ -1,0 +1,87 @@
+body{
+    /* animation: rodar 200ms linear infinite ; */
+}
+
+@keyframes rodar {
+    from{
+        transform: rotateZ(0deg);
+        
+    }to{
+        transform: rotateZ(360deg);
+
+    }
+}
+
+.main{
+    padding-top: 5em;
+    background-image: linear-gradient(to bottom right, rgb(63, 0, 112), rgb(112, 4, 0));
+    height: 91vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.sectionMae{
+    font-family: 'Bebas Neue';
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.sectionMae > section{
+    display: flex;
+    flex-direction: column;
+    padding: 3em;
+}
+
+.sectionMae > section > input{
+    min-width: 30vw;
+    border: none;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    padding: 10px;
+    margin: .5em auto;
+    font-family: 'Bebas Neue';
+    background-color: rgba(240, 248, 255, 0);
+    color: aliceblue;
+}
+
+.sectionMae > section > input::placeholder{
+    font-family: 'Bebas Neue';
+    color: rgb(248, 204, 248);
+}
+
+.sectionMae > section > button{
+    min-width: 30vw;
+    color: white;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 2em auto;
+    font-family: 'Bebas Neue';
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+    font-size: 1.3em;
+}
+
+.sectionMae > section > button:hover{
+    color: black;
+    transition: 1s;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+}
+
+.sectionMae > section > p{
+    padding: 1em;
+}
+
+h2{
+    font-weight: 0;
+    font-size: 3em;
+    text-align: center;
+}
+
+footer{
+    margin: 0;
+}

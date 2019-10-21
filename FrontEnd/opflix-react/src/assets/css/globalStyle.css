@@ -1,0 +1,162 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url(../../fonts/BebasNeue.otf)
+}
+
+.nav{
+    background-color: rgba(255, 254, 254, 0.945);
+    border-bottom: 2px solid #ccc;
+    position: fixed;
+    z-index: 1;
+    width: 100vw;
+    margin-bottom: 2em;
+}
+
+.thumbnail{
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    align-items: initial;
+    margin-left: 1em;
+}
+
+.logout{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.divLogo{
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    font-family: 'Bebas Neue';
+    font-size: 1.2em;
+    margin-top: 0.5em;
+}
+
+.logo{
+    margin: 0em 1em;
+    max-width: 125px;
+    font-size: 1.2em;
+}
+
+.slogan{
+    margin-left: 20px;
+    min-width: 200px;
+}
+
+.divMenu{
+    display: flex;
+    max-width: 25vw;
+    justify-content: space-evenly;
+    font: 100;
+    font-size: 1.2em;
+    margin: 0em 3em 0em 0em;
+    align-items: center;
+}
+
+.li{
+    margin: 0em .5em;
+    border-bottom: 1px solid rgba(255, 0, 0, 0);
+    padding: .2em 0.4em;
+    border-radius: 0px;
+}
+
+.btnFav{
+    margin: 0em .5em;
+    border: 1px solid rgb(168, 168, 168);
+    padding: .2em .8em;
+    border-radius: 0px;
+    background: white;
+    font-weight: 200;
+}
+
+.btnFav:hover{
+    margin: 0em .5em;
+    border: 1px solid rgb(129, 129, 129);
+    padding: .2em .8em;
+
+    border-radius: 0px;
+    background: white;
+    font-weight: 200;
+}
+
+.li > a{
+    color: black;
+}
+
+
+.liCadastro{
+    border: 1px solid rgb(41, 0, 0);
+    padding: .2em 0.3em;
+    border-radius: 3px;
+}
+
+.liCadastro > a{
+    color: black;
+}
+
+.liCadastro:hover{
+    background-color: rgb(248, 248, 248);
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 3s;
+}
+
+.li:hover{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1.5px solid rgb(41, 0, 0);
+    border-radius: 0px;
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 3s;
+}
+
+
+@-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+#ulMenu{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Bebas Neue';
+    align-items: center;    
+}
+
+/* ----------------------- FOOTER ------------- */
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Bebas Neue';
+    border-top: 1px solid black;
+    background-color: rgb(41, 41, 41);
+    color: antiquewhite;
+    font-weight: 0;
+    font-size: 1em;
+}
+
+.footer > div{
+    margin: 2em 0em 1em 3em;
+}
+
+.text__login {
+    font-family: none;
+    font-size: 12px;
+    opacity: 0.6;
+    margin-bottom: 20px;
+}
