@@ -36,6 +36,8 @@ namespace Senai.OpFlix.WebApi.Repositories
         public void Deletar(int id)
         {
             var retorno = dB.Lancamentos.Find(id);
+
+
             dB.Remove(retorno);
             dB.SaveChanges();
         }

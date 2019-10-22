@@ -22,7 +22,7 @@ export default class NavBar extends Component {
                     </div>
 
                     <div className="divMenu">
-                        <li className="li"><Link to="/home" > Home </Link></li>
+                        {/* <li className="li"><Link to="/home" > Home </Link></li> */}
                         <li className="li"><Link to="/dashboard"> Dashboard </Link></li> 
                         <li className="li logout" onClick={this.Deslogar}> Deslogar </li>
                     </div>

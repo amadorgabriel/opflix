@@ -19,6 +19,7 @@ import { Route, Link, BrowserRouter as Router, Switch, Redirect } from "react-ro
 
 // --------------------------------------------------------
 
+
 const RotaPrivada = ({ component: Component }) => (
     <Route
         render={props =>
@@ -39,14 +40,15 @@ const PermissaoAdmin = ({ component: Component }) => (
             props =>
                 //Admin
 
-                parseJwt().perm === "Admin" ? (
+                localStorage.getItem("usuario-opflix") !== null && parseJwt().perm === "Admin" ? (
                     <DashboardAdmin {...props} />
-                    ) : (
-                        <Route component={NaoEncontrado} />
+                ) : (
+                        <Route component={Login} />
                     )
         }
     />
 );
+
 
 const routing = (
     <Router>

@@ -46,13 +46,23 @@ export default class App extends Component {
   }
 
   listarLancamentos = () => {
-    fetch('http://localhost:5000/api/Lancamentos')
+    // fetch('http://localhost:5000/api/Lancamentos')
+    //   .then(data => data.json())
+    //   .then(res => {
+    //     this.setState({ listaLancamentos: res })
+    //   })
+
+    fetch('http://localhost:5000/api/Lancamentos', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
+      }
+    })
       .then(data => data.json())
       .then(res => {
-        //console.log(res)
         this.setState({ listaLancamentos: res })
       })
-    // .catch(erro => alert('Erro:' + erro))
   }
 
   listar = () => {
@@ -60,7 +70,7 @@ export default class App extends Component {
   }
 
   listarCategorias = () => {
-   
+
     // fetch('http://localhost:5000/api/Categorias')
     //   .then(data => data.json())
     //   .then(res => { this.setState({ listaCategorias: res }) })
@@ -231,14 +241,14 @@ export default class App extends Component {
                       <strong className="strg">Data Lançamento:</strong>
                       {(element.dataLancamento != null) ? element.dataLancamento : element.idLancamentoNavigation.dataLancamento}
                     </p>
-                    {/* <p>
+                    <p>
                       <strong className="strg">Categoria:</strong>
-                      {(element.idLancamentoNavigation.idTipoConteudoNavigation.nome != null) ? element.idLancamentoNavigation.idTipoConteudoNavigation.nome : element.idTipoConteudoNavigation.nome}
-                    </p> */}
-                    {/* <p>
+                      {element.idCategoriaNavigation != undefined ? element.idCategoriaNavigation.nome  : 'nulo'}
+                    </p>
+                    <p>
                       <strong className="strg">Conteúdo:</strong>
-                      {(element.idTipoConteudoNavigation.nome != null) ? element.idTipoConteudoNavigation.nome : element.idLancamentoNavigation.idTipoConteudoNavigation.nome}
-                    </p> */}
+                      {element.idTipoConteudoNavigation != undefined ? element.idTipoConteudoNavigation.nome  : 'nulo'}
+                    </p>
 
                     <button className="btnFavorito" id={element.idLancamento} value={element.idLancamento} onClick={this.Favoritar}> {this.state.msgFavoritado} </button>
                   </article>

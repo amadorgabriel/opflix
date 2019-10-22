@@ -37,7 +37,6 @@
     font-family: 'Bebas Neue';
 }
 
-
 .cadastrarL{
     width: 65%;
     background-color: #494b4c;
@@ -138,4 +137,18 @@
 
 .divBtn{
     padding-top: 2em;
+}
+
+.tableAlign{
+    background: rgb(255, 255, 255);
+    text-align: center;
+    color: black;
+}
+
+/* .tableAlign > thead >  tr{
+    border: 20px solid #2b3137;   
+} */
+
+.blackColor{
+    color: black
 }

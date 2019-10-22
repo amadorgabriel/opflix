@@ -23,28 +23,52 @@ export default class Login extends Component {
             NomeCad: "",
             EmailCad: "",
             SenhaCad: "",
-            UrlCad: ""
+            UrlCad: "",
+
+            nomeAdmin: "",
+
+            //Cadastro Lançamentos
+            tituloL: "",
+            dataL: "",
+            duracao: "",
+            sinopse: "",
+            idCatCad: "",
+            idPlatCad: "",
+            msgCatCad: "",
+            nomeCatCad: "",
+            nomePlatCad: "",
+
+
         }
     }
 
     // --------------- LISTAGENS
 
     listarLancamentos = () => {
-        fetch('http://localhost:5000/api/Lancamentos')
-            .then(data => data.json())
-            .then(res => {
-                this.setState({ listaLancamentos: res })
-            })
-        // .catch(erro => alert('Erro:' + erro))
+        var config = {
+            headers: { 'Authorization': "bearer " + localStorage.getItem("usuario-opflix") }
+        };
+
+        Axios.get(
+            'http://localhost:5000/api/Lancamentos',
+            config
+        ).then((response) => {
+            this.setState({ listaLancamentos: response.data })
+        })
     }
 
     listarPlataformas = () => {
-        fetch('http://localhost:5000/api/Plataformas')
-            .then(data => data.json())
-            .then(res => {
-                this.setState({ listaPlataformas: res })
-            })
-        // .catch(erro => alert('Erro:' + erro))
+        var config = {
+            headers: { 'Authorization': "bearer " + localStorage.getItem("usuario-opflix") }
+        };
+
+        Axios.get(
+            'http://localhost:5000/api/Plataformas',
+            config
+        ).then((response) => {
+            this.setState({ listaPlataformas: response.data })
+        })
+            .catch(err => console.log(err))
     }
 
     listarCategorias = () => {
@@ -82,8 +106,77 @@ export default class Login extends Component {
         this.setState({ UrlCad: event.target.value })
     }
 
-    // --------------- CADASTROS
+    SetarNomeAdmin = (event) => {
+        var token = localStorage.getItem("usuario-opflix").split('.');
+        var base64Url = token[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var tokenJSON = JSON.parse(window.atob(base64));
+        var nomeAdmin = (tokenJSON.nome)
 
+        this.setState({ nomeAdmin: nomeAdmin })
+    }
+
+    // --------------- CADASTRO LANÇAMENTO
+
+    ValorSnopse = (event) => {
+        // console.log(event.target.value);
+        this.setState({ sinopse: event.target.value })
+    }
+    ValorTitulo = (event) => {
+        // console.log(event.target.value);
+        this.setState({ tituloL: event.target.value })
+    }
+    ValorDuracao = (event) => {
+        // console.log(event.target.value);
+        this.setState({ duracao: event.target.value })
+    }
+    ValorData = (event) => {
+        // console.log(event.target.value);
+        this.setState({ dataL: event.target.value })
+    }
+    setarCatCad = (event) => {
+        this.setState({ idCatCad: event.target.value })
+    }
+    setarPlatCad = (event) => {
+        this.setState({ idPlatCad: event.target.value })
+    }
+    ValorNomeCatCad = (event) => {
+        this.setState({ nomeCatCad: event.target.value })
+        // console.log(event.target.value)
+    }
+    ValorNomePlatCad = (event) => {
+        this.setState({ nomePlatCad: event.target.value })
+        // console.log(event.target.value)
+    }
+
+    CadastrarLancamento = (event) => {
+        event.preventDefault();
+
+        fetch('http://localhost:5000/api/Lancamentos', {
+            method: "POST",
+            body: JSON.stringify({
+                dataLancamento: this.state.dataL,
+                duracao: this.state.duracao,
+                titulo: this.state.tituloL,
+                sinopse: this.state.sinopse,
+                idCategoria: this.state.idCatCad,
+                idTipoConteudo: this.state.idPlatCad
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
+            }
+        })
+            .then(data => {
+                if (data.status === 200) {
+                    alert("Lançamento Cadastrado")
+                    this.listarLancamentos();
+                }
+            })
+            .catch(erro => {
+                this.setState({ msgCatCad: "Não Cadastrado" });
+            })
+    }
     CadastrarUser = (event) => {
         event.preventDefault();
         let urlFoto = "";
@@ -98,25 +191,31 @@ export default class Login extends Component {
             urlFoto = this.state.UrlCad;
         }
 
-        Axios.post(
-            'http://localhost:5000/api/Usuarios/cadastrar/admin',
-            config,
-            {
+        fetch('http://localhost:5000/api/Usuarios/cadastrar/admin', {
+            method: "POST",
+            body: JSON.stringify({
                 nome: this.state.NomeCad,
                 email: this.state.EmailCad,
                 senha: this.state.SenhaCad,
                 idPerfil: 1,
                 fotoPerfil: urlFoto
-            })
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
+            }
+        })
             .then(data => {
                 if (data.status === 200) {
-                    console.log('Cadastrado')
-                    this.setState({ msgErroCad: "Seu usuário foi cadastrado com sucesso" });
+                    console.log('Admim Cadastrado')
+                    alert('Administrador Cadastrado')
                 }
             })
             .catch(erro => {
-                this.setState({ msgErroCad: "Dado(s) nulos, incorretos ou email já existente" });
+                console.log('ADM Não Cadastrado, dado(s) incorretos ou email existente')
+
             })
+
 
         this.state.NomeCad = "";
         this.state.EmailCad = "";
@@ -124,20 +223,77 @@ export default class Login extends Component {
         this.state.UrlCad = "";
     }
 
+
     // --------------- DELETES
 
-    DeletarLançamento = () => {
-        event.preventDefault();
+    DeletarLançamento = (event) => {
+        // event.preventDefault();
 
-        Axios.delete(
-            'http://localhost:5000/api/Lancamentos/' + event.target.value)
+        // var config = {
+        //     headers: { 'Authorization': "bearer " + localStorage.getItem("usuario-opflix") }
+        // };
+
+        // Axios.delete(
+        //     'http://localhost:5000/api/Lancamentos/' + event.target.value,
+        //     config
+        // )
+        //     .then(data => {
+        //         if (data.status === 200) {
+        //             console.log('Lanç Deletado')
+        //         }
+        //     })
+        //     .catch(erro => {
+        //         this.setState({ msgErroCad: "Dado(s) incorretos ou inexistentes" });
+        //     })
+    }
+
+    CadastrarPlataforma = () => {
+
+        fetch('http://localhost:5000/api/Plataformas', {
+            method: "POST",
+            body: JSON.stringify({
+                nome: this.state.nomePlatCad
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
+            }
+        })
             .then(data => {
                 if (data.status === 200) {
-                    console.log('Lanç Deletado')
+                    alert("Plataforma Cadastrada")
+                    this.listarCategorias();
+                } else {
+                    console.log('n cadas')
                 }
             })
             .catch(erro => {
-                this.setState({ msgErroCad: "Dado(s) incorretos ou inexistentes" });
+                this.setState({ msgCatCad: "Não Cadastrado" });
+            })
+    }
+
+    CadastrarCategoria = () => {
+
+        fetch('http://localhost:5000/api/Categorias', {
+            method: "POST",
+            body: JSON.stringify({
+                nome: this.state.nomeCatCad
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
+            }
+        })
+            .then(data => {
+                if (data.status === 200) {
+                    alert("Categoria Cadastrada")
+                    this.listarCategorias();
+                } else {
+                    console.log('n cadas')
+                }
+            })
+            .catch(erro => {
+                this.setState({ msgCatCad: "Não Cadastrado" });
             })
 
     }
@@ -148,6 +304,7 @@ export default class Login extends Component {
         this.listarLancamentos();
         this.listarCategorias();
         this.listarPlataformas();
+        this.SetarNomeAdmin();
     }
 
     render() {
@@ -159,7 +316,7 @@ export default class Login extends Component {
                 </header>
 
                 <article className="warning">
-                    <p>BEM VINDO Administrador! | @Nome Usuário</p>
+                    <p>  Administrador! | BEM VINDO, {this.state.nomeAdmin} </p>
                 </article>
 
                 <section className="Lancamentos">
@@ -173,20 +330,37 @@ export default class Login extends Component {
                         </div>
 
                         <form className="formCad" action="">
-                            <input required className="input" placeholder="Titulo.." type="text" />
-                            <input required className="input" placeholder="Sinopse.." type="text" />
-                            <input required className="input" placeholder="Duração.." type="text" />
-                            <input required className="input" placeholder="Data Laçamento.." type="date" />
+                            <input className="input" placeholder="Titulo.." type="text" onChange={this.ValorTitulo} value={this.state.tituloL} />
+                            <input className="input" placeholder="Sinopse.." type="text" onChange={this.ValorSnopse} value={this.state.sinopse} />
+                            <input className="input" placeholder="Duração.." type="time" onChange={this.ValorDuracao} value={this.state.duracao} />
+                            <input className="input" placeholder="Data Laçamento.." type="date" onChange={this.ValorData} value={this.state.dataL} />
 
-                            <select className="input" name="categoriasSel">
-                                <option required value="" selected disabled>Categoria: </option>
+                            <select className="input" name="categoriasSel" onChange={this.setarCatCad} >
+                                <option required value="" selected disabled>Categorias:</option>
+                                {this.state.listaCategorias.map(element => {
+                                    return (
+                                        <option className="blackColor" value={element.idCategoria}> {element.nome} </option>
+                                    )
+                                })}
                             </select>
-                            <select className="input" name="plataformasSel">
-                                <option value="" selected disabled>Plataforma: </option>
+
+                            <select className="input" name="plataformasSel" onChange={this.setarPlatCad}  >
+                                <option value="" selected disabled>Plataformas:</option>
+                                {this.state.listaPlataformas.map(element => {
+                                    return (
+                                        <option className="blackColor" value={element.idPlataforma}> {element.nome} </option>
+                                    )
+                                })}
                             </select>
 
                             <div className="divBtn">
-                                <button className="inputGlobal btnCad"> Cadastrar </button>
+                                <button className="inputGlobal btnCad" onClick={this.CadastrarLancamento}> Cadastrar </button>
+                                <p
+                                    className="text__login"
+                                    style={{ color: "white", textAlign: "center" }}
+                                >
+                                    {this.state.msgCatCad}
+                                </p>
                                 <div>Ou</div>
                                 <button className="inputGlobal btnAtu"> Atualizar </button>
                             </div>
@@ -199,9 +373,9 @@ export default class Login extends Component {
                             <h2 className="h2">Listar</h2>
                         </div>
 
-                        <table className="w3-table-all w3-hoverable">
+                        <table className="tableAlign">
                             <thead>
-                                <tr className="w3-light-grey">
+                                <tr>
                                     <th>#IdL</th>
                                     <th>Titulo</th>
                                     <th>Data Lançamento</th>
@@ -211,18 +385,20 @@ export default class Login extends Component {
                                 </tr>
                             </thead>
 
-                            {this.state.listaLancamentos.map(element => {
-                                return (
-                                    <tr key={element.idLancamento}>
-                                        <td>{element.idLancamento}</td>
-                                        <td>{element.titulo}</td>
-                                        <td>{element.dataLancamento}</td>
-                                        <td>{element.duracao}</td>
-                                        <td>{element.sinopse}</td>
-                                        <td><button className="btnDel" value={element.idLancamento} onClick={this.DeletarLançamento} >Deletar</button></td>
-                                    </tr>
-                                );
-                            })}
+                            <tbody>
+                                {this.state.listaLancamentos.map(element => {
+                                    return (
+                                        <tr key={element.idLancamento}>
+                                            <td>{element.idLancamento}</td>
+                                            <td>{element.titulo}</td>
+                                            <td>{element.dataLancamento}</td>
+                                            <td>{element.duracao}</td>
+                                            <td>{element.sinopse}</td>
+                                            <td><button className="btnDel" value={element.idLancamento} onClick={this.DeletarLançamento} >Deletar</button></td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
 
                         </table>
                     </section>
@@ -239,10 +415,10 @@ export default class Login extends Component {
                         </div>
 
                         <form className="formCad" action="">
-                            <input required className="input" placeholder="Nome.." type="text" />
+                            <input className="input" onChange={this.ValorNomeCatCad} value={this.state.nomeCatCad} placeholder="Nome.." type="text" />
 
                             <div className="divBtn">
-                                <button className="inputGlobal btnCad"> Cadastrar </button>
+                                <button className="inputGlobal btnCad" onClick={this.CadastrarCategoria} > Cadastrar </button>
                                 <div>Ou</div>
                                 <button className="inputGlobal btnAtu"> Atualizar </button>
                             </div>
@@ -254,7 +430,7 @@ export default class Login extends Component {
                             <h2 className="h2">Listar</h2>
                         </div>
 
-                        <table className="w3-table-all w3-hoverable">
+                        <table className="tableAlign">
                             <thead>
                                 <tr className="w3-light-grey">
                                     <th>#IdC</th>
@@ -262,16 +438,18 @@ export default class Login extends Component {
                                 </tr>
                             </thead>
 
-                            {
-                                this.state.listaCategorias.map(element => {
-                                    return (
-                                        <tr key={element.idCategoria}>
-                                            <td>{element.idCategoria}</td>
-                                            <td>{element.nome}</td>
-                                        </tr>
-                                    );
-                                })
-                            }
+                            <tbody>
+                                {
+                                    this.state.listaCategorias.map(element => {
+                                        return (
+                                            <tr key={element.idCategoria}>
+                                                <td>{element.idCategoria}</td>
+                                                <td>{element.nome}</td>
+                                            </tr>
+                                        );
+                                    })
+                                }
+                            </tbody>
 
                         </table>
 
@@ -288,10 +466,10 @@ export default class Login extends Component {
                         </div>
 
                         <form className="formCad" action="">
-                            <input required className="input" placeholder="Nome.." type="text" />
+                            <input onChange={this.ValorNomePlatCad} value={this.state.nomePlatCad} className="input" placeholder="Nome.." type="text" />
 
                             <div className="divBtn">
-                                <button className="inputGlobal btnCad"> Cadastrar </button>
+                                <button className="inputGlobal btnCad" onClick={this.CadastrarPlataforma}> Cadastrar </button>
                                 <div>Ou</div>
                                 <button className="inputGlobal btnAtu"> Atualizar </button>
                             </div>
@@ -303,24 +481,26 @@ export default class Login extends Component {
                             <h2 className="h2">Listar</h2>
                         </div>
 
-                        <table className="w3-table-all w3-hoverable">
-                            <thead>
-                                <tr className="w3-light-grey">
+                        <table className="tableAlign">
+                            <thead className="trTable">
+                                <tr>
                                     <th>#IdP</th>
                                     <th>Nome</th>
                                 </tr>
                             </thead>
 
-                            {
-                                this.state.listaPlataformas.map(element => {
-                                    return (
-                                        <tr key={element.idPlataforma}>
-                                            <td>{element.idPlataforma}</td>
-                                            <td>{element.nome}</td>
-                                        </tr>
-                                    );
-                                })
-                            }
+                            <tbody>
+                                {
+                                    this.state.listaPlataformas.map(element => {
+                                        return (
+                                            <tr key={element.idPlataforma}>
+                                                <td>{element.idPlataforma}</td>
+                                                <td>{element.nome}</td>
+                                            </tr>
+                                        );
+                                    })
+                                }
+                            </tbody>
 
                         </table>
                     </section>
@@ -335,22 +515,18 @@ export default class Login extends Component {
                         </div>
 
                         <form className="formCad" action="">
-                            <input required className="input" placeholder="Nome.." type="text" onChange={this.ValorNomeCad} value={this.state.NomeCad} />
-                            <input required className="input" placeholder="Email.." type="email" onChange={this.ValorEmailCad} value={this.state.EmailCad} />
-                            <input required className="input" placeholder="Senha.." type="password" onChange={this.ValorSenhaCad} value={this.state.SenhaCad} />
-                            <input required className="input" placeholder="Foto perfil: URL.." type="text" onChange={this.ValorUrlCad} value={this.state.UrlCad} />
+                            <input className="input" placeholder="Nome.." type="text" onChange={this.ValorNomeCad} value={this.state.NomeCad} />
+                            <input className="input" placeholder="Email.." type="email" onChange={this.ValorEmailCad} value={this.state.EmailCad} />
+                            <input className="input" placeholder="Senha.." type="password" onChange={this.ValorSenhaCad} value={this.state.SenhaCad} />
+                            <input className="input" placeholder="Foto perfil: URL.." type="text" onChange={this.ValorUrlCad} value={this.state.UrlCad} />
 
                             <div className="divBtn">
                                 <button className="inputGlobal btnCad" onClick={this.CadastrarUser} > Cadastrar </button>
-                                <p
-                                    className="text__login"
-                                    style={{ color: "white", textAlign: "center" }}
-                                >
-                                    {this.state.msgErroCad}
-                                </p>
+
                             </div>
                         </form>
                     </section>
+
                 </section>
 
                 <Footer />

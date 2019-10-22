@@ -12,21 +12,21 @@ export default class NavBar extends Component {
         window.location.reload();
     }
 
-    algumaCoisa = () => {
-        var token = localStorage.getItem("usuario-opflix").split('.');
-        var base64Url = token[1];
-        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var tokenJSON = JSON.parse(window.atob(base64));
-        var permToken = (tokenJSON.perm)
+    // algumaCoisa = () => {
+    //     var token = localStorage.getItem("usuario-opflix").split('.');
+    //     var base64Url = token[1];
+    //     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    //     var tokenJSON = JSON.parse(window.atob(base64));
+    //     var permToken = (tokenJSON.perm)
 
-        console.log(permToken)
+    //     console.log(permToken)
 
-        if (permToken == 'Admin') {
-            this.props.history.push('dashboard');
-        } else {
-            this.props.history.push('home');
-        }
-    }
+    //     if (permToken == 'Admin') {
+    //         this.props.history.push('dashboard');
+    //     } else {
+    //         this.props.history.push('home');
+    //     }
+    // }
 
     render() {
         return (
