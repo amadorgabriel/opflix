@@ -60,10 +60,23 @@ export default class App extends Component {
   }
 
   listarCategorias = () => {
-    fetch('http://localhost:5000/api/Categorias')
-      .then(data => data.json())
-      .then(res => { this.setState({ listaCategorias: res }) })
+   
+    // fetch('http://localhost:5000/api/Categorias')
+    //   .then(data => data.json())
+    //   .then(res => { this.setState({ listaCategorias: res }) })
     // .catch(erro => alert('Erro:' + erro))
+
+    var config = {
+      headers: { 'Authorization': "bearer " + localStorage.getItem("usuario-opflix") }
+    };
+
+    Axios.get(
+      'http://localhost:5000/api/Categorias',
+      config
+    ).then((response) => {
+      this.setState({ listaCategorias: response.data })
+    })
+
   }
 
   filtrarPorCategoria = (event) => {
@@ -73,6 +86,7 @@ export default class App extends Component {
       .then(data => data.json())
       .then(res => { this.setState({ listaLancamentos: res }) })
     //.catch(erro => alert('Erro:' + erro))
+
   }
 
   ordenarPorData = (event) => {

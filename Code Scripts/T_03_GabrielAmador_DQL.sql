@@ -25,6 +25,7 @@ WHERE Plataformas.Nome LIKE '%net%'
 
 SELECT * FROM Categorias;
 SELECT * FROM PlataformaLancamento;
+SELECT * FROM Plataformas;
 SELECT * FROM Usuarios;
 SELECT * FROM TipoConteudo;
 SELECT * FROM Favoritos;

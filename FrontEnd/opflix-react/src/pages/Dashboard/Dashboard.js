@@ -16,8 +16,138 @@ export default class Login extends Component {
     constructor() {
         super();
         this.state = {
-
+            listaLancamentos: [],
+            listaCategorias: [],
+            listaPlataformas: [],
+            msgErroCad: "",
+            NomeCad: "",
+            EmailCad: "",
+            SenhaCad: "",
+            UrlCad: ""
         }
+    }
+
+    // --------------- LISTAGENS
+
+    listarLancamentos = () => {
+        fetch('http://localhost:5000/api/Lancamentos')
+            .then(data => data.json())
+            .then(res => {
+                this.setState({ listaLancamentos: res })
+            })
+        // .catch(erro => alert('Erro:' + erro))
+    }
+
+    listarPlataformas = () => {
+        fetch('http://localhost:5000/api/Plataformas')
+            .then(data => data.json())
+            .then(res => {
+                this.setState({ listaPlataformas: res })
+            })
+        // .catch(erro => alert('Erro:' + erro))
+    }
+
+    listarCategorias = () => {
+        var config = {
+            headers: { 'Authorization': "bearer " + localStorage.getItem("usuario-opflix") }
+        };
+
+        Axios.get(
+            'http://localhost:5000/api/Categorias',
+            config
+        ).then((response) => {
+            this.setState({ listaCategorias: response.data })
+        })
+    }
+
+    // ----------- CADASTRO VALUES
+
+    ValorNomeCad = (event) => {
+        // console.log(event.target.value);
+        this.setState({ NomeCad: event.target.value })
+    }
+
+    ValorEmailCad = (event) => {
+        // console.log(event.target.value);
+        this.setState({ EmailCad: event.target.value })
+    }
+
+    ValorSenhaCad = (event) => {
+        // console.log(event.target.value);
+        this.setState({ SenhaCad: event.target.value })
+    }
+
+    ValorUrlCad = (event) => {
+        // console.log(event.target.value);
+        this.setState({ UrlCad: event.target.value })
+    }
+
+    // --------------- CADASTROS
+
+    CadastrarUser = (event) => {
+        event.preventDefault();
+        let urlFoto = "";
+
+        var config = {
+            headers: { 'Authorization': "bearer " + localStorage.getItem("usuario-opflix") }
+        };
+
+        if (this.state.UrlCad == null || this.state.UrlCad == "") {
+            urlFoto = 'https://abrilexame.files.wordpress.com/2018/10/capaprofile.jpg?quality=70&strip=info&resize=680,453'
+        } else {
+            urlFoto = this.state.UrlCad;
+        }
+
+        Axios.post(
+            'http://localhost:5000/api/Usuarios/cadastrar/admin',
+            config,
+            {
+                nome: this.state.NomeCad,
+                email: this.state.EmailCad,
+                senha: this.state.SenhaCad,
+                idPerfil: 1,
+                fotoPerfil: urlFoto
+            })
+            .then(data => {
+                if (data.status === 200) {
+                    console.log('Cadastrado')
+                    this.setState({ msgErroCad: "Seu usuário foi cadastrado com sucesso" });
+                }
+            })
+            .catch(erro => {
+                this.setState({ msgErroCad: "Dado(s) nulos, incorretos ou email já existente" });
+            })
+
+        this.state.NomeCad = "";
+        this.state.EmailCad = "";
+        this.state.SenhaCad = "";
+        this.state.UrlCad = "";
+    }
+
+    // --------------- DELETES
+
+    DeletarLançamento = () => {
+        event.preventDefault();
+
+        Axios.delete(
+            'http://localhost:5000/api/Lancamentos/' + event.target.value)
+            .then(data => {
+                if (data.status === 200) {
+                    console.log('Lanç Deletado')
+                }
+            })
+            .catch(erro => {
+                this.setState({ msgErroCad: "Dado(s) incorretos ou inexistentes" });
+            })
+
+    }
+
+    // --------------- DID MOUNTING
+
+    componentDidMount() {
+        this.listarLancamentos();
+        this.listarCategorias();
+        this.listarPlataformas();
     }
 
     render() {
@@ -74,33 +204,26 @@ export default class Login extends Component {
                                 <tr className="w3-light-grey">
                                     <th>#IdL</th>
                                     <th>Titulo</th>
-                                    <th>Lançamento</th>
+                                    <th>Data Lançamento</th>
+                                    <th>Duração</th>
                                     <th>Sinopse</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>Smith</td>
-                                <td>50</td>
-                                <td>50</td>
-                                <td><button className="btnDel">Deletar</button></td>
 
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jackson</td>
-                                <td>94</td>
-                                <td>94</td>
-                                <td><button className="btnDel">Deletar</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Johnson</td>
-                                <td>67</td>
-                                <td>94</td>
-                                <td><button className="btnDel">Deletar</button></td>
-                            </tr>
+                            {this.state.listaLancamentos.map(element => {
+                                return (
+                                    <tr key={element.idLancamento}>
+                                        <td>{element.idLancamento}</td>
+                                        <td>{element.titulo}</td>
+                                        <td>{element.dataLancamento}</td>
+                                        <td>{element.duracao}</td>
+                                        <td>{element.sinopse}</td>
+                                        <td><button className="btnDel" value={element.idLancamento} onClick={this.DeletarLançamento} >Deletar</button></td>
+                                    </tr>
+                                );
+                            })}
+
                         </table>
                     </section>
                 </section>
@@ -138,18 +261,18 @@ export default class Login extends Component {
                                     <th>Nome</th>
                                 </tr>
                             </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>Smith</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jackson</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Johnson</td>
-                            </tr>
+
+                            {
+                                this.state.listaCategorias.map(element => {
+                                    return (
+                                        <tr key={element.idCategoria}>
+                                            <td>{element.idCategoria}</td>
+                                            <td>{element.nome}</td>
+                                        </tr>
+                                    );
+                                })
+                            }
+
                         </table>
 
                     </section>
@@ -187,18 +310,18 @@ export default class Login extends Component {
                                     <th>Nome</th>
                                 </tr>
                             </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>Smith</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jackson</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Johnson</td>
-                            </tr>
+
+                            {
+                                this.state.listaPlataformas.map(element => {
+                                    return (
+                                        <tr key={element.idPlataforma}>
+                                            <td>{element.idPlataforma}</td>
+                                            <td>{element.nome}</td>
+                                        </tr>
+                                    );
+                                })
+                            }
+
                         </table>
                     </section>
                 </section>
@@ -212,13 +335,19 @@ export default class Login extends Component {
                         </div>
 
                         <form className="formCad" action="">
-                            <input required className="input" placeholder="Nome.." type="text" />
-                            <input required className="input" placeholder="Email.." type="email" />
-                            <input required className="input" placeholder="Senha.." type="password" />
-                            <input required className="input" placeholder="Foto perfil: URL.." type="text" />
+                            <input required className="input" placeholder="Nome.." type="text" onChange={this.ValorNomeCad} value={this.state.NomeCad} />
+                            <input required className="input" placeholder="Email.." type="email" onChange={this.ValorEmailCad} value={this.state.EmailCad} />
+                            <input required className="input" placeholder="Senha.." type="password" onChange={this.ValorSenhaCad} value={this.state.SenhaCad} />
+                            <input required className="input" placeholder="Foto perfil: URL.." type="text" onChange={this.ValorUrlCad} value={this.state.UrlCad} />
 
                             <div className="divBtn">
-                                <button className="inputGlobal btnCad"> Cadastrar </button>
+                                <button className="inputGlobal btnCad" onClick={this.CadastrarUser} > Cadastrar </button>
+                                <p
+                                    className="text__login"
+                                    style={{ color: "white", textAlign: "center" }}
+                                >
+                                    {this.state.msgErroCad}
+                                </p>
                             </div>
                         </form>
                     </section>
