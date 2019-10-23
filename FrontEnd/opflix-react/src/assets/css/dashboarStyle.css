@@ -45,12 +45,15 @@
     margin-bottom: 4em;
     border-radius: 5px;
     border: 1px solid #ccc;
-
+    
     display: flex;
     flex-direction: column;
     min-width: 60vw;
 }
 
+.teste{
+    margin-bottom: 8em;
+}
 .inputGlobal{
     padding: .6em 1em;
     border: none;

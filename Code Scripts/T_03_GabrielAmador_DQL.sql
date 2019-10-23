@@ -30,10 +30,11 @@ SELECT * FROM Usuarios;
 SELECT * FROM TipoConteudo;
 SELECT * FROM Favoritos;
 SELECT * FROM Perfil;
-SELECT * FROM Lancamentos ORDER BY DataLancamento
+SELECT * FROM Lancamentos ORDER BY IdLancamento;
 
-DELETE FROM Favoritos;
-
+DELETE FROM Lancamentos WHERE IdLancamento = 3
+DELETE FROM Lancamentos WHERE IdLancamento = 83
+DELETE FROM Lancamentos WHERE IdLancamento = 84
 
 -------------- FUNCTIONS ---------------
 
@@ -55,6 +56,9 @@ SELECT * FROM vw_PlataformaLancamento
 
 SELECT * FROM Lancamentos WHERE IdCategoria = 1;
 
+
+ALTER TABLE Lancamentos 
+ALTER COLUMN FotoLanc
 
 
 

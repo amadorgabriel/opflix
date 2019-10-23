@@ -10,7 +10,6 @@ import '../../assets/css/dashboarStyle.css';
 // COMPONENTES
 import NavbarAdmin from '../../components/NavBarAdmin.js';
 import Footer from '../../components/Footer.js';
-import { type } from 'os';
 
 export default class Login extends Component {
 
@@ -41,6 +40,8 @@ export default class Login extends Component {
             msgCatCad: "",
             nomeCatCad: "",
             nomePlatCad: "",
+            fotoL: "",
+            idTipoCad: "",
 
             //Atualizar 
             idPlataformaAtualizar: "",
@@ -135,11 +136,15 @@ export default class Login extends Component {
         // console.log(event.target.value);
         this.setState({ dataL: event.target.value })
     }
+    ValorFoto = (event) => {
+        console.log(event.target.value)
+        this.setState({ fotoL: event.target.value })
+    }
     setarCatCad = (event) => {
         this.setState({ idCatCad: event.target.value })
     }
-    setarPlatCad = (event) => {
-        this.setState({ idPlatCad: event.target.value })
+    setarTipoCad = (event) => {
+        this.setState({ idTipoCad: event.target.value })
     }
     ValorNomeCatCad = (event) => {
         this.setState({ nomeCatCad: event.target.value })
@@ -178,7 +183,8 @@ export default class Login extends Component {
                     titulo: this.state.tituloL,
                     sinopse: this.state.sinopse,
                     idCategoria: this.state.idCatCad,
-                    idTipoConteudo: this.state.idPlatCad
+                    idTipoConteudo: this.state.idTipoCad,
+                    fotoLanc: this.state.fotoL,
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -189,6 +195,8 @@ export default class Login extends Component {
                     if (data.status === 200) {
                         alert("Lançamento Cadastrado")
                         this.listarLancamentos();
+                    } else {
+                        console.log('n cadas')
                     }
                 })
                 .catch(erro => {
@@ -280,7 +288,6 @@ export default class Login extends Component {
     CadastrarCategoria = () => {
 
         if (this.state.idCategoriaAtualizar == "") {
-
 
             fetch('http://localhost:5000/api/Categorias', {
                 method: "POST",
@@ -384,33 +391,47 @@ export default class Login extends Component {
 
         var url = 'http://localhost:5000/api/Lancamentos/' + this.state.idLancAtualizar;
 
-        if (this.state.idLancAtualizar != null && this.state.tituloL != "" && this.state.sinopse != "" && this.state.duracao != "" && this.state.dataL != "" && this.state.idCatCad != "" && this.state.idPlatCad != "") {
+        if (this.state.idLancAtualizar != '') {
 
-            fetch(url,
-                {
-                    method: "PUT",
-                    body: JSON.stringify({
-                        dataLancamento: this.state.dataL,
-                        duracao: this.state.duracao,
-                        titulo: this.state.tituloL,
-                        sinopse: this.state.sinopse,
-                        idCategoria: this.state.idCatCad,
-                        idTipoConteudo: this.state.idPlatCad
-                    }),
-                    headers: {
-                        "Content-Type": "application/json",
-                        // 'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
-                    }
-                })
-                .then(data => {
-                    if (data.status === 200) {
-                        alert("Lançamento Atualizado")
-                        this.listarLancamentos();
-                    } else {
-                        console.log('Lançamento não atualizado')
-                        alert('Lançamento não atualizado, ID inexistente, dado(s) nulos ou incorretos')
-                    }
-                })
+            var a = this.state.tituloL
+            var b = this.state.sinopse
+            var c = this.state.duracao
+            var d = this.state.dataL
+            var e = this.state.idCatCad
+            var f = this.state.idTipoCad
+            var g = this.state.fotoL 
+
+            console.log(a, b, c, d, e, f, g, url)
+
+            if (a != "" && b != "" && c != "" && d != "" && e != "" && f != "" ) {
+
+                fetch(url,
+                    {
+                        method: "PUT",
+                        body: JSON.stringify({
+                            titulo: a,
+                            sinopse: b,
+                            duracao: c,
+                            dataLancamento: d,
+                            idCategoria: e,
+                            idTipoConteudo: f,
+                            fotoLanc: g
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
+                        }
+                    })
+                    .then(data => {
+                        if (data.status === 200) {
+                            alert("Lançamento Atualizado")
+                            this.listarLancamentos();
+                        } else {
+                            console.log('Lançamento não atualizado')
+                            alert('Lançamento não atualizado, ID inexistente, dado(s) nulos ou incorretos')
+                        }
+                    })
+            }
 
         } else {
             alert('Você só pode atualizar se houverem todos dados digitados')
@@ -474,6 +495,7 @@ export default class Login extends Component {
                             <input className="input" placeholder="Sinopse.." type="text" onChange={this.ValorSnopse} value={this.state.sinopse} />
                             <input className="input" placeholder="Duração.." type="time" onChange={this.ValorDuracao} value={this.state.duracao} />
                             <input className="input" placeholder="Data Laçamento.." type="date" onChange={this.ValorData} value={this.state.dataL} />
+                            <input className="input" placeholder="URL ou Endereco de Imagem.." type="text" onChange={this.ValorFoto} value={this.state.fotoL} />
 
                             <select className="input" name="categoriasSel" onChange={this.setarCatCad} >
                                 <option required value="" selected disabled>Categorias:</option>
@@ -484,23 +506,14 @@ export default class Login extends Component {
                                 })}
                             </select>
 
-                            <select className="input" name="plataformasSel" onChange={this.setarPlatCad}  >
-                                <option value="" selected disabled>Plataformas:</option>
-                                {this.state.listaPlataformas.map(element => {
-                                    return (
-                                        <option className="blackColor" value={element.idPlataforma}> {element.nome} </option>
-                                    )
-                                })}
+                            <select className="input" name="plataformasSel" onChange={this.setarTipoCad}  >
+                                <option value="" selected disabled>Tipo Conteudo:</option>
+                                <option className="blackColor" value="1"> Filme </option>
+                                <option className="blackColor" value="2"> Série </option>
                             </select>
 
                             <div className="divBtn">
                                 <button className="inputGlobal btnCad" onClick={this.CadastrarLancamento}> Cadastrar </button>
-                                <p
-                                    className="text__login"
-                                    style={{ color: "white", textAlign: "center" }}
-                                >
-                                    {this.state.msgCatCad}
-                                </p>
                                 <div>Ou</div>
                                 <button className="inputGlobal btnAtu" onClick={this.AtualizarLancamento} > Atualizar </button>
                             </div>
@@ -649,7 +662,7 @@ export default class Login extends Component {
                 <section className="Lancamentos">
                     <h2 className="h1">Usuarios</h2>
 
-                    <section className="cadastrarL">
+                    <section className="cadastrarL teste">
                         <div className="div1">
                             <h2 className="h2">Cadastrar Administrador</h2>
                         </div>
