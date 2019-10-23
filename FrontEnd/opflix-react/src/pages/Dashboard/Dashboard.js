@@ -10,16 +10,20 @@ import '../../assets/css/dashboarStyle.css';
 // COMPONENTES
 import NavbarAdmin from '../../components/NavBarAdmin.js';
 import Footer from '../../components/Footer.js';
+import { type } from 'os';
 
 export default class Login extends Component {
 
     constructor() {
         super();
         this.state = {
+            //Listas
             listaLancamentos: [],
             listaCategorias: [],
             listaPlataformas: [],
             msgErroCad: "",
+
+            //Cadastro Usuário
             NomeCad: "",
             EmailCad: "",
             SenhaCad: "",
@@ -38,6 +42,10 @@ export default class Login extends Component {
             nomeCatCad: "",
             nomePlatCad: "",
 
+            //Atualizar 
+            idPlataformaAtualizar: "",
+            idCategoriaAtualizar: "",
+            idLancAtualizar: "",
 
         }
     }
@@ -84,28 +92,24 @@ export default class Login extends Component {
         })
     }
 
-    // ----------- CADASTRO VALUES
+    // --------------- OnChange Values
 
     ValorNomeCad = (event) => {
         // console.log(event.target.value);
         this.setState({ NomeCad: event.target.value })
     }
-
     ValorEmailCad = (event) => {
         // console.log(event.target.value);
         this.setState({ EmailCad: event.target.value })
     }
-
     ValorSenhaCad = (event) => {
         // console.log(event.target.value);
         this.setState({ SenhaCad: event.target.value })
     }
-
     ValorUrlCad = (event) => {
         // console.log(event.target.value);
         this.setState({ UrlCad: event.target.value })
     }
-
     SetarNomeAdmin = (event) => {
         var token = localStorage.getItem("usuario-opflix").split('.');
         var base64Url = token[1];
@@ -115,9 +119,6 @@ export default class Login extends Component {
 
         this.setState({ nomeAdmin: nomeAdmin })
     }
-
-    // --------------- CADASTRO LANÇAMENTO
-
     ValorSnopse = (event) => {
         // console.log(event.target.value);
         this.setState({ sinopse: event.target.value })
@@ -148,35 +149,57 @@ export default class Login extends Component {
         this.setState({ nomePlatCad: event.target.value })
         // console.log(event.target.value)
     }
+    ValorIdPlat = (event) => {
+        this.setState({ idPlataformaAtualizar: event.target.value })
+        // console.log(event.target.value)
+    }
+    ValorIdCat = (event) => {
+        this.setState({ idCategoriaAtualizar: event.target.value })
+        //console.log(event.target.value)
+    }
+    ValorIdLanc = (event) => {
+        this.setState({ idLancAtualizar: event.target.value })
+        // console.log(event.target.value)
+    }
+
+
+    //------------ CADASTROS
 
     CadastrarLancamento = (event) => {
         event.preventDefault();
 
-        fetch('http://localhost:5000/api/Lancamentos', {
-            method: "POST",
-            body: JSON.stringify({
-                dataLancamento: this.state.dataL,
-                duracao: this.state.duracao,
-                titulo: this.state.tituloL,
-                sinopse: this.state.sinopse,
-                idCategoria: this.state.idCatCad,
-                idTipoConteudo: this.state.idPlatCad
-            }),
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
-            }
-        })
-            .then(data => {
-                if (data.status === 200) {
-                    alert("Lançamento Cadastrado")
-                    this.listarLancamentos();
+        if (this.state.idLancAtualizar == "") {
+
+            fetch('http://localhost:5000/api/Lancamentos', {
+                method: "POST",
+                body: JSON.stringify({
+                    dataLancamento: this.state.dataL,
+                    duracao: this.state.duracao,
+                    titulo: this.state.tituloL,
+                    sinopse: this.state.sinopse,
+                    idCategoria: this.state.idCatCad,
+                    idTipoConteudo: this.state.idPlatCad
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
                 }
             })
-            .catch(erro => {
-                this.setState({ msgCatCad: "Não Cadastrado" });
-            })
+                .then(data => {
+                    if (data.status === 200) {
+                        alert("Lançamento Cadastrado")
+                        this.listarLancamentos();
+                    }
+                })
+                .catch(erro => {
+                    this.setState({ msgCatCad: "Não Cadastrado" });
+                })
+
+        } else {
+            alert('Se for cadastrar um lançamento exclua o o campo de id');
+        }
     }
+
     CadastrarUser = (event) => {
         event.preventDefault();
         let urlFoto = "";
@@ -216,7 +239,6 @@ export default class Login extends Component {
 
             })
 
-
         this.state.NomeCad = "";
         this.state.EmailCad = "";
         this.state.SenhaCad = "";
@@ -224,77 +246,195 @@ export default class Login extends Component {
     }
 
 
-    // --------------- DELETES
+    CadastrarPlataforma = () => {
 
-    DeletarLançamento = (event) => {
-        // event.preventDefault();
+        if (this.state.idPlataformaAtualizar == "") {
+
+            fetch('http://localhost:5000/api/Plataformas', {
+                method: "POST",
+                body: JSON.stringify({
+                    nome: this.state.nomePlatCad
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
+                }
+            })
+                .then(data => {
+                    if (data.status === 200) {
+                        alert("Plataforma Cadastrada")
+                        this.listarPlataformas();
+                    } else {
+                        console.log('n cadas')
+                    }
+                })
+                .catch(erro => {
+                    this.setState({ msgCatCad: "Não Cadastrado" });
+                })
+        } else {
+            alert('Se for cadastrar uma plataforma exclua o o campo de id');
+        }
+
+    }
+
+    CadastrarCategoria = () => {
+
+        if (this.state.idCategoriaAtualizar == "") {
+
+
+            fetch('http://localhost:5000/api/Categorias', {
+                method: "POST",
+                body: JSON.stringify({
+                    nome: this.state.nomeCatCad
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
+                }
+            })
+                .then(data => {
+                    if (data.status === 200) {
+                        alert("Categoria Cadastrada")
+                        this.listarCategorias();
+                    } else {
+                        console.log('n cadas')
+                    }
+                })
+                .catch(erro => {
+                    this.setState({ msgCatCad: "Não Cadastrado" });
+                })
+        }
+        else {
+            alert('Se for cadastrar uma categoria exclua o o campo de id');
+        }
+    }
+
+
+
+    //---------------- ATUALIZAÇÕES
+
+    AtualizarPlataforma = (event) => {
+        event.preventDefault();
+
+        var url = 'http://localhost:5000/api/Plataformas/' + this.state.idPlataformaAtualizar;
+
+        if (this.state.idPlataformaAtualizar != null && this.state.nomePlatCad != "") {
+            fetch(url,
+                {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        nome: this.state.nomePlatCad
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
+                    }
+                })
+                .then(data => {
+                    if (data.status === 200) {
+                        alert("Plataforma Atualizada")
+                        this.listarPlataformas();
+                    } else {
+                        console.log('Plataforma não atualizada')
+                        alert('Plataforma não atualizada, ID inexistente, dado(s) nulos ou incorretos')
+
+                    }
+                })
+        } else {
+            alert('Você só pode atualizar se houver um Id e Nome digitado')
+        }
+    }
+
+    AtualizarCategoria = (event) => {
+        event.preventDefault();
+
+        var url = 'http://localhost:5000/api/Categorias/' + this.state.idCategoriaAtualizar;
+
+        if (this.state.idCategoriaAtualizar != null && this.state.nomeCatCad != "") {
+
+            fetch(url,
+                {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        nome: this.state.nomeCatCad
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
+                    }
+                })
+                .then(data => {
+                    if (data.status === 200) {
+                        alert("Categoria Atualizada")
+                        this.listarCategorias();
+                    } else {
+                        console.log('Categoria não atualizada')
+                        alert('Categoria não atualizada, ID inexistente, dado(s) nulos ou incorretos')
+
+                    }
+                })
+
+        } else {
+            alert('Você só pode atualizar se houver um Id e Nome digitado')
+        }
+    }
+
+    AtualizarLancamento = (event) => {
+        event.preventDefault();
+
+        var url = 'http://localhost:5000/api/Lancamentos/' + this.state.idLancAtualizar;
+
+        if (this.state.idLancAtualizar != null && this.state.tituloL != "" && this.state.sinopse != "" && this.state.duracao != "" && this.state.dataL != "" && this.state.idCatCad != "" && this.state.idPlatCad != "") {
+
+            fetch(url,
+                {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        dataLancamento: this.state.dataL,
+                        duracao: this.state.duracao,
+                        titulo: this.state.tituloL,
+                        sinopse: this.state.sinopse,
+                        idCategoria: this.state.idCatCad,
+                        idTipoConteudo: this.state.idPlatCad
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        // 'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
+                    }
+                })
+                .then(data => {
+                    if (data.status === 200) {
+                        alert("Lançamento Atualizado")
+                        this.listarLancamentos();
+                    } else {
+                        console.log('Lançamento não atualizado')
+                        alert('Lançamento não atualizado, ID inexistente, dado(s) nulos ou incorretos')
+                    }
+                })
+
+        } else {
+            alert('Você só pode atualizar se houverem todos dados digitados')
+        }
 
         // var config = {
         //     headers: { 'Authorization': "bearer " + localStorage.getItem("usuario-opflix") }
         // };
 
-        // Axios.delete(
-        //     'http://localhost:5000/api/Lancamentos/' + event.target.value,
-        //     config
-        // )
-        //     .then(data => {
-        //         if (data.status === 200) {
-        //             console.log('Lanç Deletado')
-        //         }
+        // Axios.put(
+        //     'http://localhost:5000/api/Lancamentos/' + this.state.idLancAtualizar,
+        //     config,
+        //     body: JSON.stringify({
+        //         dataLancamento: this.state.dataL,
+        //         duracao: this.state.duracao,
+        //         titulo: this.state.tituloL,
+        //         sinopse: this.state.sinopse,
+        //         idCategoria: this.state.idCatCad,
+        //         idTipoConteudo: this.state.idPlatCad
         //     })
-        //     .catch(erro => {
-        //         this.setState({ msgErroCad: "Dado(s) incorretos ou inexistentes" });
-        //     })
-    }
-
-    CadastrarPlataforma = () => {
-
-        fetch('http://localhost:5000/api/Plataformas', {
-            method: "POST",
-            body: JSON.stringify({
-                nome: this.state.nomePlatCad
-            }),
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
-            }
-        })
-            .then(data => {
-                if (data.status === 200) {
-                    alert("Plataforma Cadastrada")
-                    this.listarCategorias();
-                } else {
-                    console.log('n cadas')
-                }
-            })
-            .catch(erro => {
-                this.setState({ msgCatCad: "Não Cadastrado" });
-            })
-    }
-
-    CadastrarCategoria = () => {
-
-        fetch('http://localhost:5000/api/Categorias', {
-            method: "POST",
-            body: JSON.stringify({
-                nome: this.state.nomeCatCad
-            }),
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': "bearer " + localStorage.getItem("usuario-opflix")
-            }
-        })
-            .then(data => {
-                if (data.status === 200) {
-                    alert("Categoria Cadastrada")
-                    this.listarCategorias();
-                } else {
-                    console.log('n cadas')
-                }
-            })
-            .catch(erro => {
-                this.setState({ msgCatCad: "Não Cadastrado" });
-            })
+        // ).then((response) => {
+        //     console.log(response.status)
+        //     console.log(response.data)
+        // })
 
     }
 
@@ -320,13 +460,13 @@ export default class Login extends Component {
                 </article>
 
                 <section className="Lancamentos">
-                    <h1 className="h1">Lançamentos Count()</h1>
+                    <h1 className="h1">Lançamentos Quant({this.state.listaLancamentos.length})</h1>
 
                     <section className="cadastrarL">
 
                         <div className="div1">
                             <h2 className="h2">Cadastrar</h2>
-                            <input className="inputIdLan" type="number" placeholder="IdLanç.." />
+                            <input className="inputIdLan" type="number" placeholder="IdLanç.." onChange={this.ValorIdLanc} value={this.state.idLancAtualizar} />
                         </div>
 
                         <form className="formCad" action="">
@@ -362,7 +502,7 @@ export default class Login extends Component {
                                     {this.state.msgCatCad}
                                 </p>
                                 <div>Ou</div>
-                                <button className="inputGlobal btnAtu"> Atualizar </button>
+                                <button className="inputGlobal btnAtu" onClick={this.AtualizarLancamento} > Atualizar </button>
                             </div>
 
                         </form>
@@ -381,7 +521,7 @@ export default class Login extends Component {
                                     <th>Data Lançamento</th>
                                     <th>Duração</th>
                                     <th>Sinopse</th>
-                                    <th>Ação</th>
+                                    {/* <th>Ação</th> */}
                                 </tr>
                             </thead>
 
@@ -394,7 +534,7 @@ export default class Login extends Component {
                                             <td>{element.dataLancamento}</td>
                                             <td>{element.duracao}</td>
                                             <td>{element.sinopse}</td>
-                                            <td><button className="btnDel" value={element.idLancamento} onClick={this.DeletarLançamento} >Deletar</button></td>
+                                            {/* <td><button className="btnDel" value={element.idLancamento} onClick={this.DeletarLançamento} >Deletar</button></td> */}
                                         </tr>
                                     );
                                 })}
@@ -406,12 +546,12 @@ export default class Login extends Component {
 
 
                 <section className="Lancamentos">
-                    <h2 className="h1">Categorias Count()</h2>
+                    <h2 className="h1">Categorias Quant({this.state.listaCategorias.length})</h2>
 
                     <section className="cadastrarL">
                         <div className="div1">
                             <h2 className="h2">Cadastrar</h2>
-                            <input className="inputIdLan" type="number" placeholder="IdCat.." />
+                            <input className="inputIdLan" type="number" placeholder="IdCat.." onChange={this.ValorIdCat} value={this.state.idCategoriaAtualizar} />
                         </div>
 
                         <form className="formCad" action="">
@@ -420,7 +560,7 @@ export default class Login extends Component {
                             <div className="divBtn">
                                 <button className="inputGlobal btnCad" onClick={this.CadastrarCategoria} > Cadastrar </button>
                                 <div>Ou</div>
-                                <button className="inputGlobal btnAtu"> Atualizar </button>
+                                <button className="inputGlobal btnAtu" onClick={this.AtualizarCategoria}> Atualizar </button>
                             </div>
                         </form>
                     </section>
@@ -457,12 +597,12 @@ export default class Login extends Component {
                 </section>
 
                 <section className="Lancamentos">
-                    <h2 className="h1">Plataformas Count()</h2>
+                    <h2 className="h1">Plataformas Quant({this.state.listaPlataformas.length})</h2>
 
                     <section className="cadastrarL">
                         <div className="div1">
                             <h2 className="h2">Cadastrar</h2>
-                            <input className="inputIdLan" type="number" placeholder="IdP.." />
+                            <input className="inputIdLan" type="number" placeholder="IdP.." onChange={this.ValorIdPlat} value={this.state.idPlataformaAtualizar} />
                         </div>
 
                         <form className="formCad" action="">
@@ -471,7 +611,7 @@ export default class Login extends Component {
                             <div className="divBtn">
                                 <button className="inputGlobal btnCad" onClick={this.CadastrarPlataforma}> Cadastrar </button>
                                 <div>Ou</div>
-                                <button className="inputGlobal btnAtu"> Atualizar </button>
+                                <button className="inputGlobal btnAtu" onClick={this.AtualizarPlataforma} > Atualizar </button>
                             </div>
                         </form>
                     </section>
@@ -507,7 +647,7 @@ export default class Login extends Component {
                 </section>
 
                 <section className="Lancamentos">
-                    <h2 className="h1">Usuarios Count()</h2>
+                    <h2 className="h1">Usuarios</h2>
 
                     <section className="cadastrarL">
                         <div className="div1">

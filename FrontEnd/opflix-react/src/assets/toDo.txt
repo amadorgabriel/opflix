@@ -1,26 +1,13 @@
-ALTEREI EM CASA:
-
---> Listar Categorias App.js
---> Dashboard em geral
--->
--->
--->
--->
--->
 
 VERIFICAR 
 
 --> Arrumar NavBars
 --> Deletar Lançamentos
---> Criar Counts Dashboard
---> Listagem Lançamentos com Plataformas e Categorias
 --> Carrosel
 -->
 -->
 -->
 
-Desautorizei 
-	ListarPorCategorias
 
 Preciso Criar
 	Pagina quando não houver lançamentos do tipo ou nao tem favoritos
@@ -28,6 +15,5 @@ Preciso Criar
 
 --------------------------------
 
-	Listar Categorias e Plataformas nos Lançamento
 	Criar Pg caso não houver lanç favoritos ou por categorias
 	Criar Carrousel Recat
