@@ -159,9 +159,10 @@ main{
   font-family: 'Bebas Neue';
 }
 
-main{
+main, body{
   background-color: rgb(243, 243, 243);
 }
+
 
 header{
   background-color: rgb(243, 243, 243);
@@ -235,5 +236,18 @@ h3{
   color: #fff;
   background: rgb(97, 97, 97);
   transition: 0.6s ease;
+}
+
+.lancamento2{
+  margin: 9em auto ;
+}
+
+.lancamento > h2 {
+  padding: 1em;
+  color: rgb(59, 22, 104);
+  text-align: center;
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 5px;
+  background: #ccc;
 }
 

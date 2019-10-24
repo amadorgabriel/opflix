@@ -1,7 +1,9 @@
-﻿using Senai.OpFlix.WebApi.Domains;
+﻿using Microsoft.EntityFrameworkCore;
+using Senai.OpFlix.WebApi.Domains;
 using Senai.OpFlix.WebApi.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,7 +28,8 @@ namespace Senai.OpFlix.WebApi.Repositories
 
         public List<Categorias> Listar()
         {
-            return dB.Categorias.ToList();
+            return dB.Categorias.FromSql("SELECT * FROM Categorias ORDER BY IdCategoria").ToList();
         }
+
     }
 }

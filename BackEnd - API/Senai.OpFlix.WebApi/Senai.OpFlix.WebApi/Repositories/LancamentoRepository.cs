@@ -55,7 +55,7 @@ namespace Senai.OpFlix.WebApi.Repositories
 
         public List<Lancamentos> Listar()
         {
-             return dB.Lancamentos.Include(categ => categ.IdCategoriaNavigation).Include(TipoConteudo  => TipoConteudo.IdTipoConteudoNavigation ).ToList();
+             return dB.Lancamentos.Include(categ => categ.IdCategoriaNavigation).Include(TipoConteudo  => TipoConteudo.IdTipoConteudoNavigation ).OrderBy(x => x.IdLancamento).ToList();
         }
 
         public List<Lancamentos> ListarPorDataLancamento(string orderBy)

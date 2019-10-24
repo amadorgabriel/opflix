@@ -1,4 +1,5 @@
-﻿using Senai.OpFlix.WebApi.Domains;
+﻿using Microsoft.EntityFrameworkCore;
+using Senai.OpFlix.WebApi.Domains;
 using Senai.OpFlix.WebApi.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Senai.OpFlix.WebApi.Repositories
 
         public List<Plataformas> Listar()
         {
-            return dB.Plataformas.ToList();
+            return dB.Plataformas.FromSql("SELECT * FROM Plataformas ORDER BY IdPlataforma").ToList();
         }
     }
 }
