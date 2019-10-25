@@ -202,13 +202,16 @@ h3{
   min-width: 60vw;
   margin: 0 auto;
   justify-content: left;
-  padding: 3em 0em 0em 20em;
+  padding: 3em 3em 3em 12em;
+}
+
+.paddingBottom{
+  padding-bottom: 10em; 
 }
 
 .lancamento > img{
   width: 200px;
   height: 350px;
-
 }
 
 .filtroI{
@@ -239,7 +242,11 @@ h3{
 }
 
 .lancamento2{
-  margin: 9em auto ;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 12em auto ;
+  padding: 0
 }
 
 .lancamento > h2 {

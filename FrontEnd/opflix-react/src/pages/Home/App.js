@@ -184,7 +184,7 @@ export default class App extends Component {
             </div> */}
         </header>
 
-        <main className="footerBasic" >
+        <main className="footerBasic paddingBottom" >
           {/* <!-- https://www.myfonts.com/fonts/profonts/graphique-pro?tab=individualStyles --> */}
           <img className="h1" src="./fonts/H1.JPG" alt="" />
 
@@ -265,12 +265,10 @@ export default class App extends Component {
 
               )
           }
-          
-
+        
   </main>
 
         <Footer />
-
       </div>
     );
   }

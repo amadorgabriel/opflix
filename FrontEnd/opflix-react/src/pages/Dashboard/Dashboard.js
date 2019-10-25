@@ -495,7 +495,7 @@ export default class Login extends Component {
                             <input className="input" placeholder="Sinopse.." type="text" onChange={this.ValorSnopse} value={this.state.sinopse} />
                             <input className="input" placeholder="Duração.." type="time" onChange={this.ValorDuracao} value={this.state.duracao} />
                             <input className="input" placeholder="Data Laçamento.." type="date" onChange={this.ValorData} value={this.state.dataL} />
-                            <input className="input" placeholder="URL ou Endereco de Imagem.." type="text" onChange={this.ValorFoto} value={this.state.fotoL} />
+                            <input className="input" placeholder="URL ou Endereco de Imagem.. (max 500 caracteres)" type="text" onChange={this.ValorFoto} value={this.state.fotoL} />
 
                             <select className="input" name="categoriasSel" onChange={this.setarCatCad} >
                                 <option required value="" selected disabled>Categorias:</option>

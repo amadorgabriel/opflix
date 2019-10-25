@@ -170,7 +170,7 @@ export default class Login extends Component {
                             <input type="text" required placeholder="Nome.." onChange={this.ValorNomeCad} value={this.state.NomeCad} />
                             <input type="email" required placeholder="Email.." onChange={this.ValorEmailCad} value={this.state.EmailCad} />
                             <input type="password" required placeholder="Senha.." onChange={this.ValorSenhaCad} value={this.state.SenhaCad} />
-                            <input type="url" placeholder="URL foto perfil.." onChange={this.ValorUrlCad} value={this.state.UrlCad} />
+                            <input type="url" placeholder="URL foto perfil.. (max 500 caracteres)" onChange={this.ValorUrlCad} value={this.state.UrlCad} />
                             <button onClick={this.CadastrarUser} >Cadastrar</button>
                             <p
                                 className="text__login"
