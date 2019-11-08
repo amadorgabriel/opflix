@@ -1,6 +1,6 @@
 // PAGES
-import LoginScreen from '../pages/Login/login';
-import CadastroScreen from '../pages/Cadastro/cadastro';
+import LoginScreen from '../src/pages/Login/login';
+import CadastroScreen from '../src/pages/Cadastro/cadastro';
 
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
@@ -10,17 +10,45 @@ const AuthStack = createStackNavigator({
     Login: {screen: LoginScreen},
 });
 
-const MainNavigator = createBottomTabNavigator({
+const CadastroStack = createStackNavigator({
+    Cadastro: {screen: CadastroScreen}
+});
+
+const NavSemLogon = createBottomTabNavigator({
     Login: {screen: LoginScreen},
     Cadastro: {screen: CadastroScreen}
-})
+},
+{
+    initialRouteName: 'Login',
+    tabBarOptions: {
+        showLabel: false,
+        showIcon: true,
+        activeBackgroundColor: "#333777",
+        inactiveBackgroundColor: "#333222",
+        style: {
+            width: '100%',
+            height: 50
+        },
+        labelStyle: {
+            paddingBottom: 6,
+            // fontWeigth: "bold",
+            fontSize: 25,
+        },
+        tabStyle: {
+            width: 100,
+        }
+    },
+},
+
+)
 
 
 // container
 export default createAppContainer(
     createSwitchNavigator({
-        MainNavigator,
-        AuthStack
+        NavSemLogon,
+        AuthStack ,
+        CadastroStack 
     },
     {
         initialRouteName: 'AuthStack'
