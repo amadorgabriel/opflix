@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, StatusBar, AsyncStorage } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 export default class Login extends Component {
@@ -11,11 +11,10 @@ export default class Login extends Component {
     constructor() {
         super();
         this.state = {
-            email: '',
-            senha: ''
+            email: 'a@a.com',
+            senha: '123456'
         }
     }
-
 
     _logar = async () => {
         await fetch('http://192.168.4.199:5000/api/Login', {
@@ -32,8 +31,18 @@ export default class Login extends Component {
             .then(res => res.json())
 
             //ALTERAR
-            .then(data => console.warn('Aeeeeeeeee LOGADO ' + data.token))
+            .then(data => this._irParaLancamentos(data.token))
             .catch(erro => console.warn('Nao Logado'));
+    }
+
+    _irParaLancamentos = async (token) => {
+        
+        if (token != null) {
+            try {
+                await AsyncStorage.setItem('@opflix:token', token);
+                this.props.navigation.navigate('NavegadorPadrao');
+            } catch (err) { }
+        }
     }
 
     _irParaCadastro = () => {
@@ -77,7 +86,7 @@ const styles = StyleSheet.create({
         paddingTop: 100
     },
     h1: {
-        color: '#631994',
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: 40,
         textAlign: 'center',
@@ -93,7 +102,7 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     btnLogar:{
-        color: '#631994',
+        color: '#fff',
         fontSize: 20,
         borderColor: '#631994',
         width: 150,

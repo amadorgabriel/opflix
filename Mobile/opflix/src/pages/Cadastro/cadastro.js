@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 export default class Cadastro extends Component {
@@ -20,7 +20,7 @@ export default class Cadastro extends Component {
     }
 
     _tratarResponse = (res) => {
-        this.setState({responseValue: res.status})
+        this.setState({ responseValue: res.status })
     }
 
     _cadastrar = async () => {
@@ -40,39 +40,44 @@ export default class Cadastro extends Component {
         })
             .then(res => this._tratarResponse(res))
             .catch(err => console.warn('Usuário Não Cadastrado ( dados incorretos ou já existentes)'))
-  
-            //console.warn(this.state.responseValue)
-            if(this.state.responseValue == 200){
-                this.props.navigation.navigate('AuthStack')
-            }else{
-                console.warn('Usuário Não Cadastrado ( dados incorretos ou já existentes');
-            }
+
+        //console.warn(this.state.responseValue)
+        if (this.state.responseValue == 200) {
+            this.props.navigation.navigate('AuthStack')
+        } else {
+            console.warn('Usuário Não Cadastrado ( dados incorretos ou já existentes');
         }
+    }
 
     _irParaLogin = () => {
-        this.props.navigation.navigate('AuthStack') 
+        this.props.navigation.navigate('AuthStack')
     }
 
     render() {
         return (
             <View style={styles.divMae}>
 
+                <TouchableOpacity onPress={this._irParaLogin} >
+                    <Image
+                        onPress={this._irParaLogin}
+                        style={styles.btnVoltar}
+                        source={require('../../assets/icons/ArrowBack.png')}
+                    />
+                </TouchableOpacity>
+
                 <Text style={styles.h1} >Cadastro</Text>
 
-                <View  style={{marginBottom: 30}}>
-                    <TextInput placeholderTextColor="#fff"  style={styles.input}  placeholder="Nome" value={this.state.nome} onChangeText={nome => this.setState({ nome })} />
-                    <TextInput placeholderTextColor="#fff"  style={styles.input}  placeholder="Email" value={this.state.email} onChangeText={email => this.setState({ email })} />
-                    <TextInput placeholderTextColor="#fff"  style={styles.input}  placeholder="Senha" value={this.state.senha} onChangeText={senha => this.setState({ senha })} />
-                    <TextInput placeholderTextColor="#fff"  style={styles.input}  placeholder="Endereço de Imagem Perfil" value={this.state.fotoPerfil} onChangeText={fotoPerfil => this.setState({ fotoPerfil })} />
+                <View style={{ marginBottom: 30 }}>
+                    <TextInput placeholderTextColor="#fff" style={styles.input} placeholder="Nome" value={this.state.nome} onChangeText={nome => this.setState({ nome })} />
+                    <TextInput placeholderTextColor="#fff" style={styles.input} placeholder="Email" value={this.state.email} onChangeText={email => this.setState({ email })} />
+                    <TextInput placeholderTextColor="#fff" style={styles.input} placeholder="Senha" value={this.state.senha} onChangeText={senha => this.setState({ senha })} />
+                    <TextInput placeholderTextColor="#fff" style={styles.input} placeholder="Endereço de Imagem Perfil" value={this.state.fotoPerfil} onChangeText={fotoPerfil => this.setState({ fotoPerfil })} />
                 </View>
 
                 <TouchableOpacity onPress={this._cadastrar} >
-                    <Text  style={styles.btnCad}>Cadastrar</Text>
+                    <Text style={styles.btnCad}>Cadastrar</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={this._irParaLogin} >
-                    <Text style={styles.text}>Voltar</Text>
-                </TouchableOpacity>
             </View>
         );
     }
@@ -88,7 +93,7 @@ const styles = StyleSheet.create({
         paddingTop: 60
     },
     h1: {
-        color: '#631994',
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: 40,
         textAlign: 'center',
@@ -103,8 +108,8 @@ const styles = StyleSheet.create({
         width: 380,
         marginBottom: 20
     },
-    btnCad:{
-        color: '#631994',
+    btnCad: {
+        color: '#fff',
         fontSize: 20,
         borderColor: '#631994',
         width: 150,
@@ -119,5 +124,10 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 15,
         textAlign: 'center',
+    },
+    btnVoltar: {
+        width: 40,
+        height: 30,
+        tintColor: '#fff',
     }
 });

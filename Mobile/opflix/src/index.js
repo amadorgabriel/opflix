@@ -1,6 +1,7 @@
 // PAGES
 import LoginScreen from '../src/pages/Login/login';
 import CadastroScreen from '../src/pages/Cadastro/cadastro';
+import LancamentosScreen from '../src/pages/Lancametos/lancamentos'
 
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
@@ -14,12 +15,11 @@ const CadastroStack = createStackNavigator({
     Cadastro: {screen: CadastroScreen}
 });
 
-const NavSemLogon = createBottomTabNavigator({
-    Login: {screen: LoginScreen},
-    Cadastro: {screen: CadastroScreen}
+const NavegadorPadrao = createBottomTabNavigator({
+    Lancamentos: {screen: LancamentosScreen},
 },
 {
-    initialRouteName: 'Login',
+    initialRouteName: 'Lancamentos',
     tabBarOptions: {
         showLabel: false,
         showIcon: true,
@@ -46,7 +46,7 @@ const NavSemLogon = createBottomTabNavigator({
 // container
 export default createAppContainer(
     createSwitchNavigator({
-        NavSemLogon,
+        NavegadorPadrao,
         AuthStack ,
         CadastroStack 
     },
