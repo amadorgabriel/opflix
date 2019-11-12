@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, AsyncStorage, Image, ScrollView } from 'react-n
 import { FlatList } from 'react-native-gesture-handler';
 import jwt_decode from 'jwt-decode';
 
+
 export default class Lancamentos extends Component {
 
     static navigationOptions = {
@@ -15,13 +16,15 @@ export default class Lancamentos extends Component {
             token: '',
             tokenDecodado: '',
             lancamentosLs: [],
+            categoriasLs: [],
         }
     }
 
     componentDidMount() {
         this._setarDadosDoToken();
-
+        this._listarCategorias();
     }
+
 
     _listarLancamentos = () => {
         fetch('http://192.168.4.199:5000/api/Lancamentos', {
@@ -39,6 +42,13 @@ export default class Lancamentos extends Component {
         // console.warn(this.state.lancamentosLs)
     }
 
+    _listarCategorias = () => {
+        fetch('http://192.168.4.199:5000/api/Categorias')
+            .then(res => res.json())
+            .then(data => this.setState({ categoriasLs: data }))
+            .catch(err => console.warn(err))
+    }
+
     _setarDadosDoToken = async () => {
         try {
             const tokenSt = await AsyncStorage.getItem('@opflix:token')
@@ -52,40 +62,57 @@ export default class Lancamentos extends Component {
         //console.warn(this.state.tokenDecodado)
 
         this._listarLancamentos();
-
     }
 
 
     render() {
         return (
+
             <View style={styles.divMae}>
+                <ScrollView>
 
-                <Text style={styles.h1}> Lançamentos </Text>
 
-                <FlatList
-                horizontal={true}
-                    data={this.state.lancamentosLs}
-                    keyExtractor={item => item.idLancamento}
-                    renderItem={
-                        ({ item }) => (
-                                <View>
-                                    {/* <Text>{item.titulo}</Text>
+
+                    {/* APENAS PARA AS CATEGORIAS DIFERENTES DE NULA OU UNDEFINED */}
+                    {this.state.categoriasLs.map(x => {
+
+                        var idCat = x.idCategoria
+                        return (
+                            <View>
+                                <Text style={styles.h1}> {x.nome} </Text>
+
+                                <FlatList
+                                    horizontal={true}
+                                    data={this.state.lancamentosLs.filter(y => { return y.idCategoria === idCat })}
+                                    keyExtractor={item => item.idLancamento}
+                                    renderItem={
+                                        ({ item }) => (
+                                            <View>
+                                                {/* <Text>{item.titulo}</Text>
                                     <Text>{item.sinopse}</Text>
                                     <Text>{item.duracao}</Text>
                                     <Text>{item.dataLancamento}</Text>
                                     <Text>{item.idCategoriaNavigation != undefined ? item.idCategoriaNavigation.nome : 'nulo'}</Text>
                                     <Text>{item.idTipoConteudoNavigation != undefined ? item.idTipoConteudoNavigation.nome : 'nulo'}</Text>
-                                    <Text>{item.fotoLanc}</Text> */}
+                                <Text>{item.fotoLanc}</Text> */}
 
-                                    <Image
-                                        style={styles.img}
-                                        source={{ uri: item.fotoLanc }}
-                                    />
+                                                <Image
+                                                    style={styles.img}
+                                                    source={{ uri: item.fotoLanc }}
+                                                />
+                                            </View>
+                                        )
+                                    }
+                                />
+                            </View>
+                        );
+                    })}
 
-                                </View>
-                        )
-                    }
-                />
+                 
+
+
+
+                </ScrollView>
 
             </View>
         );
@@ -100,7 +127,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        paddingTop: 100
     },
     h1: {
         color: '#fff',
@@ -112,7 +138,8 @@ const styles = StyleSheet.create({
     img: {
         width: 120,
         height: 200,
-        marginBottom: 10,
-        marginTop: 5
-    }
+        marginLeft: 10,
+        marginRight: 5
+    },
+
 });
