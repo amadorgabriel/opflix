@@ -10,6 +10,12 @@ export default class Lancamentos extends Component {
         header: null
     }
 
+    static navigationOptions = {
+        tabBarIcon: () => (
+          <Image source={require('../../assets/icons/iconL.png')} style={styles.icon} />
+        )
+      }
+
     constructor() {
         super();
         this.state = {
@@ -64,15 +70,23 @@ export default class Lancamentos extends Component {
         this._listarLancamentos();
     }
 
+    _carregarViewNula = () => {
+        return (
+            <View style={{width: 400,  alignItems: 'center', textAlign: 'center'}}>
+                <Text style={styles.text}>Ainda não temos lançamentos dessa categoria</Text>
+                <Image
+                    style={styles.imgBreve}
+                    source={{ uri: 'http://visibilidadetrans.com.br/wp-content/uploads/2019/01/em-breve.png' }}
+                />
+            </View>
+        );
+    }
+
 
     render() {
         return (
-
             <View style={styles.divMae}>
                 <ScrollView>
-
-
-
                     {/* APENAS PARA AS CATEGORIAS DIFERENTES DE NULA OU UNDEFINED */}
                     {this.state.categoriasLs.map(x => {
 
@@ -85,6 +99,7 @@ export default class Lancamentos extends Component {
                                     horizontal={true}
                                     data={this.state.lancamentosLs.filter(y => { return y.idCategoria === idCat })}
                                     keyExtractor={item => item.idLancamento}
+                                    ListEmptyComponent={this._carregarViewNula()}
                                     renderItem={
                                         ({ item }) => (
                                             <View>
@@ -107,11 +122,6 @@ export default class Lancamentos extends Component {
                             </View>
                         );
                     })}
-
-                 
-
-
-
                 </ScrollView>
 
             </View>
@@ -141,5 +151,22 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight: 5
     },
+    imgBreve: {
+        width: 350,
+        height: 150,
+        marginTop: 5,
+        marginBottom: 5,
+    },
+    text: {
+        color: 'white',
+        fontSize: 15,
+        textAlign: 'center',
+    },
+    icon: {
+
+        tintColor: '#fff',
+        height: 35,
+        width: 35
+    }
 
 });

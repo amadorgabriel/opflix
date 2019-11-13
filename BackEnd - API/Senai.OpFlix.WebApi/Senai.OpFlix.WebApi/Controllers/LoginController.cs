@@ -56,6 +56,7 @@ namespace Senai.OpFlix.WebApi.Controllers
                 {
                     new Claim("perm", permisaoUser),
                     new Claim("nome", userReturn.Nome),
+                    new Claim("foto", userReturn.FotoPerfil),
                     new Claim(JwtRegisteredClaimNames.Email, userReturn.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, userReturn.IdUsuario.ToString()),
                     new Claim(ClaimTypes.Role, permisaoUser),

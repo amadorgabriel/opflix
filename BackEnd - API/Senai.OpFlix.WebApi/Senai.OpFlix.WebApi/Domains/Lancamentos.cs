@@ -15,7 +15,7 @@ namespace Senai.OpFlix.WebApi.Domains
         public TimeSpan Duracao { get; set; }
         public string Titulo { get; set; }
         public string Sinopse { get; set; }
-        public int? IdCategoria { get; set; }
+        public int? IdCategoria      { get; set; }
         public int? IdTipoConteudo { get; set; }
         public string FotoLanc { get; set; }
 
