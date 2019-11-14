@@ -12,9 +12,9 @@ export default class Lancamentos extends Component {
 
     static navigationOptions = {
         tabBarIcon: () => (
-          <Image source={require('../../assets/icons/iconL.png')} style={styles.icon} />
+            <Image source={require('../../assets/icons/iconL.png')} style={styles.icon} />
         )
-      }
+    }
 
     constructor() {
         super();
@@ -72,7 +72,7 @@ export default class Lancamentos extends Component {
 
     _carregarViewNula = () => {
         return (
-            <View style={{width: 400,  alignItems: 'center', textAlign: 'center'}}>
+            <View style={{ width: 400, alignItems: 'center', textAlign: 'center' }}>
                 <Text style={styles.text}>Ainda não temos lançamentos dessa categoria</Text>
                 <Image
                     style={styles.imgBreve}
@@ -166,7 +166,9 @@ const styles = StyleSheet.create({
 
         tintColor: '#fff',
         height: 35,
-        width: 35
+        width: 35,
+      
+  
     }
 
 });

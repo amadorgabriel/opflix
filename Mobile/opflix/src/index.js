@@ -54,6 +54,7 @@ const NavegadorPadrao = createBottomTabNavigator({
     // }
 },
     {
+        //inactive tint color
         initialRouteName: 'Lancamentos',
         tabBarOptions: {
             showLabel: false,

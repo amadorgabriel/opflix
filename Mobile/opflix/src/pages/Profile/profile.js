@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, Image, StyleSheet, StatusBar, AsyncStorage } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import jwt_decode from 'jwt-decode';
+
 
 export default class AlgumaPagina extends Component {
     static navigationOptions = {
@@ -9,51 +11,73 @@ export default class AlgumaPagina extends Component {
 
     static navigationOptions = {
         tabBarIcon: () => (
-          <Image source={require('../../assets/icons/account.png')} style={styles.icon} />
+            <Image source={require('../../assets/icons/account.png')} style={styles.icon} />
         )
-      }
+    }
 
     constructor() {
         super();
         this.state = {
             token: '',
-            tokenDecodado: '',
-            nome: '',
-            email: '',
-            foto: ''
+            nomeR: null,
+            emailR: null,
+            fotoR: null,
+            permissaoR: null
         }
     }
 
-    componentDidMount (){
+    componentDidMount() {
         this._setarValoresToken();
     }
+
 
     _setarValoresToken = async () => {
         try {
             const tokenSt = await AsyncStorage.getItem('@opflix:token')
+            // const nome = await jwt_decode(tokenSt.nome);
+            // const email = await jwt_decode(tokenSt.email);
+            // const foto = await jwt_decode(tokenSt.foto);
+            // const perm = await jwt_decode(tokenSt).perm;
+
+
+            // console.warn(tokenSt)
+
             if (tokenSt != null) {
                 this.setState({ token: tokenSt })
-                this.setState({ tokenDecodado: jwt_decode(tokenSt) })
-                this.setState({ nome: jwt_decode(tokenSt.nome) })
-                this.setState({ email: jwt_decode(tokenSt).email })
-                this.setState({ foto: jwt_decode(tokenSt).fotoLanc })
+
+                this.setState({ nomeR: jwt_decode(tokenSt.nome) })
+                // this.setState({ emailR: email })
+                // this.setState({ fotoR: foto })
+                // this.setState({ permissaoR: perm })
 
             }
         } catch{
-            console.warn('Token Nulo')
+             console.warn('Token Nulo')
         }
-    } 
+
+        this.render();
+        // var tokenRec =  this.state.token;
+        // console.warn ( jwt_decode(tokenRec).nome )
+        // console.warn ( jwt_decode(tokenRec).email )
+        // console.warn ( jwt_decode(tokenRec).foto )
+    }
 
 
     render() {
         return (
             <View style={styles.divMae}>
                 <StatusBar backgroundColor="#631994" barStyle="light-content" />
-                <Text style={styles.h1}>Perfil User</Text>
+                <Text style={styles.h1}>Perfil</Text>
+                
 
-                <Text>{this.state.nome}</Text>
-                <Text>{this.state.email}</Text>
-                <Text>{this.state.foto}</Text>
+                <Text style={styles.text}>{this.state.nomeR}</Text>
+                <Text style={styles.text}>{this.state.emailR}</Text>
+                <Text style={styles.text}>{this.state.permissaoR}</Text>
+
+                <Image
+                    style={styles.img}
+                    source={{ uri: this.state.fotoR }}
+                />
 
             </View>
         );
@@ -76,10 +100,8 @@ const styles = StyleSheet.create({
         paddingBottom: 40
     },
     img: {
-        width: 120,
         height: 200,
-        marginLeft: 10,
-        marginRight: 5
+        borderRadius: 120
     },
     text: {
         color: 'white',
@@ -90,7 +112,8 @@ const styles = StyleSheet.create({
 
         tintColor: '#fff',
         height: 35,
-        width: 35
+        width: 35,
+
     }
 
 })
