@@ -11,7 +11,9 @@ export default class Login extends Component {
     constructor() {
         super();
         this.state = {
-            email: 'a@a.com',
+            mostrarAviso: '',
+            //email: 'naruto@uzumaki@gmail.com',
+            email: 'erik@email.com',
             senha: '123456'
         }
     }
@@ -36,12 +38,16 @@ export default class Login extends Component {
     }
 
     _irParaLancamentos = async (token) => {
-        
+
         if (token != null) {
             try {
                 await AsyncStorage.setItem('@opflix:token', token);
+                this.state.mostrarAviso = "";
                 this.props.navigation.navigate('NavegadorPadrao');
             } catch (err) { }
+        }else{
+            this.state.mostrarAviso = "Usuário ou senha inválido(as)";
+            this.render();
         }
     }
 
@@ -56,7 +62,7 @@ export default class Login extends Component {
 
                 <Text style={styles.h1} >Login</Text>
 
-                <View style={{marginBottom: 30}}>
+                <View style={{ marginBottom: 30 }}>
                     <TextInput style={styles.input} placeholderTextColor="#fff" placeholder="Email" value={this.state.email} onChangeText={email => this.setState({ email })} />
                     <TextInput style={styles.input} placeholderTextColor="#fff" placeholder="Senha" value={this.state.senha} onChangeText={senha => this.setState({ senha })} />
                 </View>
@@ -69,7 +75,8 @@ export default class Login extends Component {
                     <Text style={styles.text} >Não tem uma conta?</Text>
                     <Text style={styles.text} >Cadastre-se!</Text>
                 </TouchableOpacity>
-            
+
+                <Text style={styles.warning}> {this.state.mostrarAviso} </Text>
 
             </View>
         );
@@ -101,7 +108,7 @@ const styles = StyleSheet.create({
         width: 380,
         marginBottom: 20
     },
-    btnLogar:{
+    btnLogar: {
         color: '#fff',
         fontSize: 20,
         borderColor: '#631994',
@@ -117,5 +124,11 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 15,
         textAlign: 'center',
+    },
+    warning: {
+        color: '#631fff',
+        textAlign: "center",
+        fontSize: 15,
+        marginTop: 20
     }
 });

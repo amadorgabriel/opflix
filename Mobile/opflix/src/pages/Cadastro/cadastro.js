@@ -13,8 +13,7 @@ export default class Cadastro extends Component {
             nome: '',
             email: '',
             senha: '',
-            fotoPerfil: '',
-
+            fotoPerfil: 'https://abrilexame.files.wordpress.com/2018/10/capaprofile.jpg?quality=70&strip=info&resize=680,453',
             responseValue: ""
         }
     }
@@ -24,6 +23,7 @@ export default class Cadastro extends Component {
     }
 
     _cadastrar = async () => {
+
         await fetch('http://192.168.4.199:5000/api/Usuarios', {
             method: 'POST',
             headers: {

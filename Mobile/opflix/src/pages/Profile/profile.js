@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View, Image, StyleSheet, StatusBar, AsyncStorage } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { Text, View, Image, StyleSheet, TouchableOpacity, StatusBar, AsyncStorage } from 'react-native';
 import jwt_decode from 'jwt-decode';
 
 
-export default class AlgumaPagina extends Component {
+export default class Profile extends Component {
     static navigationOptions = {
         header: null
     }
 
     static navigationOptions = {
-        tabBarIcon: () => (
-            <Image source={require('../../assets/icons/account.png')} style={styles.icon} />
+        tabBarIcon: ({ tintColor }) => (
+            <Image  source={require('../../assets/icons/account.png')} style={styles.icon} tintColor={tintColor} />
         )
     }
 
@@ -21,7 +20,7 @@ export default class AlgumaPagina extends Component {
             token: '',
             nomeR: null,
             emailR: null,
-            fotoR: null,
+            fotoR: 'https://abrilexame.files.wordpress.com/2018/10/capaprofile.jpg?quality=70&strip=info&resize=680,453',
             permissaoR: null
         }
     }
@@ -30,54 +29,49 @@ export default class AlgumaPagina extends Component {
         this._setarValoresToken();
     }
 
-
-    _setarValoresToken = async () => {
+    _deslogar = async () => {
         try {
-            const tokenSt = await AsyncStorage.getItem('@opflix:token')
-            // const nome = await jwt_decode(tokenSt.nome);
-            // const email = await jwt_decode(tokenSt.email);
-            // const foto = await jwt_decode(tokenSt.foto);
-            // const perm = await jwt_decode(tokenSt).perm;
-
-
-            // console.warn(tokenSt)
-
-            if (tokenSt != null) {
-                this.setState({ token: tokenSt })
-
-                this.setState({ nomeR: jwt_decode(tokenSt.nome) })
-                // this.setState({ emailR: email })
-                // this.setState({ fotoR: foto })
-                // this.setState({ permissaoR: perm })
-
-            }
-        } catch{
-             console.warn('Token Nulo')
+            await AsyncStorage.removeItem('@opflix:token');
+            this.props.navigation.navigate('AuthStack');
+        } catch (error) {
+            console.warn("AAAAAAAAh, Parece que nem foi");
         }
-
-        this.render();
-        // var tokenRec =  this.state.token;
-        // console.warn ( jwt_decode(tokenRec).nome )
-        // console.warn ( jwt_decode(tokenRec).email )
-        // console.warn ( jwt_decode(tokenRec).foto )
     }
 
+    _setarValoresToken = async () => {
+
+        const tokenSt = await AsyncStorage.getItem('@opflix:token')
+
+        if (tokenSt != null) {
+            this.setState({ token: tokenSt })
+            this.setState({ fotoR: jwt_decode(tokenSt).foto })
+            this.setState({ nomeR: jwt_decode(tokenSt).nome })
+            this.setState({ emailR: jwt_decode(tokenSt).email })
+            this.setState({ permissaoR: jwt_decode(tokenSt).perm })
+            //console.warn('Token' + tokenSt)
+        }
+    }
 
     render() {
+
+        console.warn(this.state.fotoR);
         return (
             <View style={styles.divMae}>
-                <StatusBar backgroundColor="#631994" barStyle="light-content" />
+                <StatusBar backgroundColor="#631994" barStyle=" light-content" />
                 <Text style={styles.h1}>Perfil</Text>
-                
-
-                <Text style={styles.text}>{this.state.nomeR}</Text>
-                <Text style={styles.text}>{this.state.emailR}</Text>
-                <Text style={styles.text}>{this.state.permissaoR}</Text>
 
                 <Image
                     style={styles.img}
                     source={{ uri: this.state.fotoR }}
                 />
+
+                <Text style={styles.text}>{this.state.nomeR}</Text>
+                <Text style={styles.text}>{this.state.emailR}</Text>
+                <Text style={styles.text}>{this.state.permissaoR}</Text>
+
+                <TouchableOpacity onPress={this._deslogar} >
+                    <Text style={styles.btnCad}>Deslogar</Text>
+                </TouchableOpacity>
 
             </View>
         );
@@ -101,7 +95,8 @@ const styles = StyleSheet.create({
     },
     img: {
         height: 200,
-        borderRadius: 120
+        width: 220,
+        borderRadius: 180,
     },
     text: {
         color: 'white',
@@ -109,11 +104,21 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     icon: {
-
         tintColor: '#fff',
         height: 35,
         width: 35,
-
-    }
+    },
+    btnCad: {
+        color: '#fff',
+        fontSize: 20,
+        borderColor: '#631994',
+        width: 150,
+        borderWidth: 3,
+        borderRadius: 50,
+        textAlign: 'center',
+        fontSize: 23,
+        padding: 6,
+        marginBottom: 20
+    },
 
 })

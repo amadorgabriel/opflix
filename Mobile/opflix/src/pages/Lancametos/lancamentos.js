@@ -11,8 +11,8 @@ export default class Lancamentos extends Component {
     }
 
     static navigationOptions = {
-        tabBarIcon: () => (
-            <Image source={require('../../assets/icons/iconL.png')} style={styles.icon} />
+        tabBarIcon: ({ tintColor }) => (
+            <Image source={require('../../assets/icons/iconL.png')} style={styles.icon} tintColor={tintColor} />
         )
     }
 
@@ -23,12 +23,14 @@ export default class Lancamentos extends Component {
             tokenDecodado: '',
             lancamentosLs: [],
             categoriasLs: [],
+            favoritosLs: [],
         }
     }
 
     componentDidMount() {
         this._setarDadosDoToken();
         this._listarCategorias();
+        this._listarFavoritos();
     }
 
 
@@ -53,6 +55,20 @@ export default class Lancamentos extends Component {
             .then(res => res.json())
             .then(data => this.setState({ categoriasLs: data }))
             .catch(err => console.warn(err))
+    }
+
+    _listarFavoritos = () => {
+        fetch('http://192.168.4.199:5000/api/Lancamentos/favoritos', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.state.token,
+            }
+        })
+            .then(res => res.json())
+            .then(data => this.setState({ favoritosLs: data }))
+
     }
 
     _setarDadosDoToken = async () => {
@@ -84,9 +100,34 @@ export default class Lancamentos extends Component {
 
 
     render() {
+        console.warn("AAAAA" + this.state.favoritosLs);
+
         return (
             <View style={styles.divMae}>
                 <ScrollView>
+
+                    <View>
+                        <Text style={styles.h1}> Favoritos </Text>
+
+                        <FlatList
+                            horizontal={true}
+                            data={this.state.favoritosLs}
+                            keyExtractor={item => item.idLancamento}
+                            ListEmptyComponent={this._carregarViewNula()}
+                            renderItem={
+                                ({ item }) => (
+                                    <View>
+                                        <Image
+                                            style={styles.img}
+                                            source={{ uri: item.fotoLanc }}
+                                        />
+                                    </View>
+                                )
+                            }
+                        />
+                    </View>
+
+
                     {/* APENAS PARA AS CATEGORIAS DIFERENTES DE NULA OU UNDEFINED */}
                     {this.state.categoriasLs.map(x => {
 
@@ -122,6 +163,7 @@ export default class Lancamentos extends Component {
                             </View>
                         );
                     })}
+
                 </ScrollView>
 
             </View>
@@ -167,8 +209,8 @@ const styles = StyleSheet.create({
         tintColor: '#fff',
         height: 35,
         width: 35,
-      
-  
+
+
     }
 
 });

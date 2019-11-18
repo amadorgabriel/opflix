@@ -4,9 +4,6 @@ import CadastroScreen from '../src/pages/Cadastro/cadastro';
 import LancamentosScreen from '../src/pages/Lancametos/lancamentos'
 import ProfileScreen from '../src/pages/Profile/profile'
 
-import LogoutScreen from '../src/pages/Logout/logout'
-import DefaultScreen from '../src/assets/Defaults/pageDefault'
-
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -23,16 +20,7 @@ const CadastroStack = createStackNavigator({
     Cadastro: { screen: CadastroScreen }
 });
 
-_deslogar =  () => {
-    try {
-         AsyncStorage.removeItem('@opflix:token');
-        AsyncStorage.clear();
-    } catch (error) {
-        console.warn(AsyncStorage.getItem('@opflix:token') + "AAAAAAAA");
-    }
 
-    this.props.navigation.navigate('AuthStack')
-}
 
 const NavegadorPadrao = createBottomTabNavigator({
     Lancamentos: { screen: LancamentosScreen },
@@ -59,8 +47,10 @@ const NavegadorPadrao = createBottomTabNavigator({
         tabBarOptions: {
             showLabel: false,
             showIcon: true,
-            activeBackgroundColor: "#222222",
-            inactiveBackgroundColor: "#333222",
+            activeBackgroundColor: "#333222",
+            inactiveBackgroundColor: "#222222",
+            activeTintColor:'#fff',
+            inactiveTintColor:'',
             style: {
                 width: '100%',
                 height: 50
