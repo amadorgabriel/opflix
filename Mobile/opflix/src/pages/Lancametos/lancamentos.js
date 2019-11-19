@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, AsyncStorage, Image, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, AsyncStorage, Image, ScrollView } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 
 export default class Lancamentos extends Component {
@@ -28,80 +28,76 @@ export default class Lancamentos extends Component {
     }
 
     componentDidMount() {
-        this._setarDadosDoToken();
+        this._listarLancamentos();
         this._listarCategorias();
         this._listarFavoritos();
     }
 
 
-    _listarLancamentos = () => {
-        fetch('http://192.168.4.199:5000/api/Lancamentos', {
+    _listarLancamentos = async () => {
+        let token = await AsyncStorage.getItem('@opflix:token')
+
+        await fetch('http://192.168.4.199:5000/api/Lancamentos', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.state.token,
+                'Authorization': 'Bearer ' + token,
             }
         })
             .then(res => res.json())
             .then(data => this.setState({ lancamentosLs: data }))
+        // .catch(x => console.warn('não vai listar os lancamentos'))
+
 
         // console.warn(this.state.token)
         // console.warn(this.state.lancamentosLs)
     }
 
-    _listarCategorias = () => {
-        fetch('http://192.168.4.199:5000/api/Categorias')
+    _listarCategorias = async () => {
+
+        await fetch('http://192.168.4.199:5000/api/Categorias')
             .then(res => res.json())
             .then(data => this.setState({ categoriasLs: data }))
-            .catch(err => console.warn(err))
+        // .catch(err => console.warn(err))
     }
 
-    _listarFavoritos = () => {
-        fetch('http://192.168.4.199:5000/api/Lancamentos/favoritos', {
+    _listarFavoritos = async () => {
+        let token = await AsyncStorage.getItem('@opflix:token')
+
+        await fetch('http://192.168.4.199:5000/api/Lancamentos/favoritos', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.state.token,
+                'Authorization': 'Bearer ' + token,
             }
         })
             .then(res => res.json())
             .then(data => this.setState({ favoritosLs: data }))
-
-    }
-
-    _setarDadosDoToken = async () => {
-        try {
-            const tokenSt = await AsyncStorage.getItem('@opflix:token')
-            if (tokenSt != null) {
-                this.setState({ token: tokenSt })
-                this.setState({ tokenDecodado: jwt_decode(tokenSt) })
-            }
-        } catch{
-            console.warn('Token Nulo')
-        }
-        //console.warn(this.state.tokenDecodado)
-
-        this._listarLancamentos();
+            .catch(x => console.warn('não vai listar os favoritos'))
     }
 
     _carregarViewNula = () => {
         return (
             <View style={{ width: 400, alignItems: 'center', textAlign: 'center' }}>
-                <Text style={styles.text}>Ainda não temos lançamentos dessa categoria</Text>
+                {/* <Text style={styles.text}>Ainda não temos lançamentos dessa categoria</Text> */}
                 <Image
                     style={styles.imgBreve}
-                    source={{ uri: 'http://visibilidadetrans.com.br/wp-content/uploads/2019/01/em-breve.png' }}
+                    source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeRsFqBXRkF6UpvXa7pIYhvSSDMp971kcMz9GjkXTwXxg5rRjA&s' }}
                 />
             </View>
         );
     }
 
+    _carregarEscolhido = (item) => {
+        this.props.navigation.navigate('EscolhidoStack');
+    }
+
 
     render() {
-        console.warn("AAAAA" + this.state.favoritosLs);
-
+        //console.warn("AAAAA" + this.state.favoritosLs);
+        // console.warn(this.state.tokenDecodado)
         return (
             <View style={styles.divMae}>
                 <ScrollView>
@@ -111,17 +107,21 @@ export default class Lancamentos extends Component {
 
                         <FlatList
                             horizontal={true}
-                            data={this.state.favoritosLs}
-                            keyExtractor={item => item.idLancamento}
+                            data={this.state.favoritosLs.idLancamentoNavigation}
                             ListEmptyComponent={this._carregarViewNula()}
+                            keyExtractor={item => item.idLancamento}
+                            key={item => item.idLancamento}
                             renderItem={
                                 ({ item }) => (
-                                    <View>
-                                        <Image
-                                            style={styles.img}
-                                            source={{ uri: item.fotoLanc }}
-                                        />
-                                    </View>
+                                    <TouchableOpacity
+                                        onPress={this._carregarEscolhido} >
+                                        <View>
+                                            <Image
+                                                style={styles.img}
+                                                source={{ uri: item.fotoLanc }}
+                                            />
+                                        </View>
+                                    </TouchableOpacity>
                                 )
                             }
                         />
@@ -140,6 +140,7 @@ export default class Lancamentos extends Component {
                                     horizontal={true}
                                     data={this.state.lancamentosLs.filter(y => { return y.idCategoria === idCat })}
                                     keyExtractor={item => item.idLancamento}
+                                    key={item => item.titulo}
                                     ListEmptyComponent={this._carregarViewNula()}
                                     renderItem={
                                         ({ item }) => (
@@ -152,10 +153,13 @@ export default class Lancamentos extends Component {
                                     <Text>{item.idTipoConteudoNavigation != undefined ? item.idTipoConteudoNavigation.nome : 'nulo'}</Text>
                                 <Text>{item.fotoLanc}</Text> */}
 
-                                                <Image
-                                                    style={styles.img}
-                                                    source={{ uri: item.fotoLanc }}
-                                                />
+                                                <TouchableOpacity
+                                                    onPress={this._carregarEscolhido(item)} >
+                                                    <Image
+                                                        style={styles.img}
+                                                        source={{ uri: item.fotoLanc }}
+                                                    />
+                                                </TouchableOpacity>
                                             </View>
                                         )
                                     }
@@ -175,7 +179,7 @@ export default class Lancamentos extends Component {
 const styles = StyleSheet.create({
     divMae: {
         backgroundColor: '#2B3137',
-        height: 700,
+        flex: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -195,7 +199,7 @@ const styles = StyleSheet.create({
     },
     imgBreve: {
         width: 350,
-        height: 150,
+        height: 200,
         marginTop: 5,
         marginBottom: 5,
     },

@@ -13,7 +13,7 @@ export default class Login extends Component {
         this.state = {
             mostrarAviso: '',
             //email: 'naruto@uzumaki@gmail.com',
-            email: 'erik@email.com',
+            email: 'y@y.com',
             senha: '123456'
         }
     }
@@ -86,7 +86,7 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
     divMae: {
         backgroundColor: '#2B3137',
-        height: 700,
+        flex:1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

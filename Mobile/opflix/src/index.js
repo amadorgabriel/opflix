@@ -3,6 +3,7 @@ import LoginScreen from '../src/pages/Login/login';
 import CadastroScreen from '../src/pages/Cadastro/cadastro';
 import LancamentosScreen from '../src/pages/Lancametos/lancamentos'
 import ProfileScreen from '../src/pages/Profile/profile'
+import LancamentoEscolhidoScreen from '../src/pages/Lancametos/LancamentoEscolhido';
 
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
@@ -20,6 +21,9 @@ const CadastroStack = createStackNavigator({
     Cadastro: { screen: CadastroScreen }
 });
 
+const EscolhidoStack = createStackNavigator({
+    LancamentoEscolhido:  {screen: LancamentoEscolhidoScreen}
+});
 
 
 const NavegadorPadrao = createBottomTabNavigator({
@@ -74,7 +78,8 @@ export default createAppContainer(
     createSwitchNavigator({
         NavegadorPadrao,
         AuthStack,
-        CadastroStack
+        CadastroStack,
+        EscolhidoStack
     },
         {
             initialRouteName: 'AuthStack'

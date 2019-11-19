@@ -86,8 +86,8 @@ export default class Cadastro extends Component {
 const styles = StyleSheet.create({
     divMae: {
         backgroundColor: '#2B3137',
-        height: 700,
         display: 'flex',
+        flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         paddingTop: 60

@@ -81,7 +81,7 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
     divMae: {
         backgroundColor: '#2B3137',
-        height: 700,
+        flex: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
