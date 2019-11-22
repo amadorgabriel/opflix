@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, AsyncStorage, Image, ScrollView } from 'react-native';
+import { Button, Text, View, TouchableOpacity, StyleSheet, AsyncStorage, Image, ScrollView } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import jwtDecode from 'jwt-decode';
+import { Alert } from 'react-native';
+
 
 
 export default class Lancamentos extends Component {
@@ -90,19 +92,31 @@ export default class Lancamentos extends Component {
         );
     }
 
-    _carregarEscolhido = (item) => {
-        this.props.navigation.navigate('EscolhidoStack');
+    _navegar = async (titulo, sinopse, duracao, data, cat, foto, con) => {
+        try {
+            await AsyncStorage.setItem('@opflix:lancTitulo', titulo);
+            await AsyncStorage.setItem('@opflix:lancSinopse', sinopse);
+            await AsyncStorage.setItem('@opflix:lancDuracao', duracao);
+            await AsyncStorage.setItem('@opflix:lancData', data);
+            await AsyncStorage.setItem('@opflix:lancFoto', foto);
+            await AsyncStorage.setItem('@opflix:lancCategoria', cat);
+            await AsyncStorage.setItem('@opflix:lancConteudo', con);
+
+            // console.warn(await AsyncStorage.getItem('@opflix:lancamento'))
+        } catch (error) {
+
+        }
+        finally {
+            this.props.navigation.navigate('EscolhidoStack');
+        }
     }
 
-
     render() {
-        //console.warn("AAAAA" + this.state.favoritosLs);
-        // console.warn(this.state.tokenDecodado)
         return (
+
             <View style={styles.divMae}>
                 <ScrollView>
-
-                    <View>
+                <View style={styles.divCat}>
                         <Text style={styles.h1}> Favoritos </Text>
 
                         <FlatList
@@ -116,10 +130,16 @@ export default class Lancamentos extends Component {
                                     <TouchableOpacity
                                         onPress={this._carregarEscolhido} >
                                         <View>
-                                            <Image
-                                                style={styles.img}
-                                                source={{ uri: item.fotoLanc }}
-                                            />
+
+                                            <TouchableOpacity
+                                                onPress={() => { this._navegar(item.titulo, item.sinopse, item.duracao, item.dataLancamento, item.idCategoriaNavigation.nome, item.fotoLanc, item.idTipoConteudoNavigation.nome); }}
+                                            >
+                                                <Image
+                                                    style={styles.img}
+                                                    source={{ uri: item.fotoLanc }}
+                                                />
+                                            </TouchableOpacity>
+
                                         </View>
                                     </TouchableOpacity>
                                 )
@@ -127,13 +147,11 @@ export default class Lancamentos extends Component {
                         />
                     </View>
 
-
                     {/* APENAS PARA AS CATEGORIAS DIFERENTES DE NULA OU UNDEFINED */}
                     {this.state.categoriasLs.map(x => {
-
                         var idCat = x.idCategoria
                         return (
-                            <View>
+                            <View style={styles.divCat}>
                                 <Text style={styles.h1}> {x.nome} </Text>
 
                                 <FlatList
@@ -144,22 +162,21 @@ export default class Lancamentos extends Component {
                                     ListEmptyComponent={this._carregarViewNula()}
                                     renderItem={
                                         ({ item }) => (
-                                            <View>
-                                                {/* <Text>{item.titulo}</Text>
-                                    <Text>{item.sinopse}</Text>
-                                    <Text>{item.duracao}</Text>
-                                    <Text>{item.dataLancamento}</Text>
-                                    <Text>{item.idCategoriaNavigation != undefined ? item.idCategoriaNavigation.nome : 'nulo'}</Text>
-                                    <Text>{item.idTipoConteudoNavigation != undefined ? item.idTipoConteudoNavigation.nome : 'nulo'}</Text>
-                                <Text>{item.fotoLanc}</Text> */}
-
+                                            <View >
                                                 <TouchableOpacity
-                                                    onPress={this._carregarEscolhido(item)} >
+                                                    onPress={() => { this._navegar(item.titulo, item.sinopse, item.duracao, item.dataLancamento, item.idCategoriaNavigation.nome, item.fotoLanc, item.idTipoConteudoNavigation.nome); }}
+                                                >
                                                     <Image
                                                         style={styles.img}
                                                         source={{ uri: item.fotoLanc }}
                                                     />
                                                 </TouchableOpacity>
+
+                                                {/* <Button
+                                                    title={item.titulo}
+                                                    color="#f194ff"
+                                                    onPress={() => Alert.alert('Button with adjusted color pressed')}
+                                                /> */}
                                             </View>
                                         )
                                     }
@@ -184,12 +201,19 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
     },
+    divCat:{
+        backgroundColor: '#363D45',
+        marginBottom: 20,
+        marginTop: 20,
+        paddingBottom: 20,
+        paddingTop: 5
+    },
     h1: {
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 40,
         textAlign: 'center',
-        paddingBottom: 40
+        paddingBottom: 25
     },
     img: {
         width: 120,
@@ -209,11 +233,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     icon: {
-
         tintColor: '#fff',
         height: 35,
         width: 35,
-
 
     }
 

@@ -55,6 +55,7 @@ export default class Cadastro extends Component {
 
     render() {
         return (
+            
             <View style={styles.divMae}>
 
                 <TouchableOpacity onPress={this._irParaLogin} >
@@ -65,6 +66,7 @@ export default class Cadastro extends Component {
                     />
                 </TouchableOpacity>
 
+                <View style={styles.divMae2}>
                 <Text style={styles.h1} >Cadastro</Text>
 
                 <View style={{ marginBottom: 30 }}>
@@ -77,6 +79,7 @@ export default class Cadastro extends Component {
                 <TouchableOpacity onPress={this._cadastrar} >
                     <Text style={styles.btnCad}>Cadastrar</Text>
                 </TouchableOpacity>
+                </View>
 
             </View>
         );
@@ -89,15 +92,18 @@ const styles = StyleSheet.create({
         display: 'flex',
         flex: 1,
         flexDirection: 'column',
+    },
+    divMae2: {
         alignItems: 'center',
-        paddingTop: 60
     },
     h1: {
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 40,
         textAlign: 'center',
-        paddingBottom: 40
+        paddingBottom: 40,
+        paddingTop: 60
+
     },
     input: {
         color: 'white',
@@ -129,5 +135,7 @@ const styles = StyleSheet.create({
         width: 40,
         height: 30,
         tintColor: '#fff',
+        marginTop: 20,
+        marginLeft: 15
     }
 });

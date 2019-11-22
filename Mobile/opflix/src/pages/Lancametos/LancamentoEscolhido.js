@@ -11,15 +11,41 @@ export default class LEscolhido extends Component {
     constructor() {
         super();
         this.state = {
-            
+            titulo: '',
+            sinopse: '',
+            duracao: '',
+            data: '',
+            categoria: '',
+            conteudo: '',
+            foto: ''
         }
     }
+
+    componentDidMount() {
+        this._carregarLancamento();
+    }
+
+    _carregarLancamento = async () => {
+
+        //console.warn( await AsyncStorage.getItem('@opflix:lancFoto'));
+
+        this.setState({ titulo: await AsyncStorage.getItem('@opflix:lancTitulo') })
+        this.setState({ sinopse: await AsyncStorage.getItem('@opflix:lancSinopse') })
+        this.setState({ duracao: await AsyncStorage.getItem('@opflix:lancDuracao') })
+        this.setState({ data: await AsyncStorage.getItem('@opflix:lancData') })
+        this.setState({ categoria: await AsyncStorage.getItem('@opflix:lancCategoria') })
+        this.setState({ conteudo: await AsyncStorage.getItem('@opflix:lancConteudo') })
+        this.setState({ foto: await AsyncStorage.getItem('@opflix:lancFoto') })
+
+    }
+
 
     _voltarParaLancamentos = () => {
         this.props.navigation.navigate('NavegadorPadrao')
     }
 
     render() {
+
         return (
             <View style={styles.divMae}>
 
@@ -31,9 +57,25 @@ export default class LEscolhido extends Component {
                     />
                 </TouchableOpacity>
 
+                <View style={styles.lanc}>
 
-                <Text style={styles.text}>{this.props.name}</Text>
-                <Text style={styles.h1} name="AAAAA" >Lancamento Escolhido</Text>
+                    <Text style={styles.h1}>{this.state.titulo}</Text>
+                    <Image
+                        style={styles.img}
+                        source={{ uri: this.state.foto }}
+                    />
+
+                    <View style={styles.divMae2}>
+                        <Text style={styles.text}> {this.state.sinopse} </Text>
+                        <Text style={styles.text}> {this.state.duracao} </Text>
+                        <Text style={styles.text}> {this.state.data} </Text>
+                        <Text style={styles.text}> {this.state.categoria} </Text>
+                        <Text style={styles.text}> {this.state.conteudo} </Text>
+
+
+                    </View>
+                </View>
+
             </View>
         );
     }
@@ -41,18 +83,20 @@ export default class LEscolhido extends Component {
 
 
 const styles = StyleSheet.create({
+
     divMae: {
         backgroundColor: '#2B3137',
         display: 'flex',
         flex: 1,
         flexDirection: 'column',
+    },
+    divMae2: {
         alignItems: 'center',
-        paddingTop: 60
     },
     h1: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 40,
+        fontSize: 30,
         textAlign: 'center',
         paddingBottom: 40
     },
@@ -65,5 +109,15 @@ const styles = StyleSheet.create({
         width: 40,
         height: 30,
         tintColor: '#fff',
+        marginTop: 20,
+        marginLeft: 15
+    },
+    img: {
+        width: 400,
+        height: 220,
+    },
+    lanc: {
+        display: 'flex',
+        justifyContent: 'center'
     }
 });
