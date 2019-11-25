@@ -13,7 +13,7 @@ export default class Login extends Component {
         this.state = {
             mostrarAviso: '',
             //email: 'naruto@uzumaki@gmail.com',
-            email: 'y@y.com',
+            email: 'erik@email.com',
             senha: '123456'
         }
     }
@@ -56,6 +56,8 @@ export default class Login extends Component {
     }
 
     render() {
+        console.disableYellowBox = true;
+
         return (
             <View style={styles.divMae}>
                 <StatusBar backgroundColor="#631994" barStyle="light-content" />
@@ -64,7 +66,7 @@ export default class Login extends Component {
 
                 <View style={{ marginBottom: 30 }}>
                     <TextInput style={styles.input} placeholderTextColor="#fff" placeholder="Email" value={this.state.email} onChangeText={email => this.setState({ email })} />
-                    <TextInput style={styles.input} placeholderTextColor="#fff" placeholder="Senha" value={this.state.senha} onChangeText={senha => this.setState({ senha })} />
+                    <TextInput style={styles.input} secureTextEntry={true} placeholderTextColor="#fff" placeholder="Senha" value={this.state.senha} onChangeText={senha => this.setState({ senha })} />
                 </View>
 
                 <TouchableOpacity onPress={this._logar} >

@@ -30,6 +30,8 @@ export default class Lancamentos extends Component {
     }
 
     componentDidMount() {
+        console.disableYellowBox = true;
+
         this._listarLancamentos();
         this._listarCategorias();
         this._listarFavoritos();
@@ -82,17 +84,22 @@ export default class Lancamentos extends Component {
 
     _carregarViewNula = () => {
         return (
-            <View style={{ width: 400, alignItems: 'center', textAlign: 'center' }}>
+            <View style={{ width: 400, alignItems: 'center', textAlign: 'center' }}
+            >
                 {/* <Text style={styles.text}>Ainda não temos lançamentos dessa categoria</Text> */}
-                <Image
-                    style={styles.imgBreve}
-                    source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeRsFqBXRkF6UpvXa7pIYhvSSDMp971kcMz9GjkXTwXxg5rRjA&s' }}
-                />
+                <TouchableOpacity
+                    onPress={() => Alert.alert("Conteúdo vazio igual a essa tigela")}
+                >
+                    <Image
+                        style={styles.imgBreve}
+                        source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeRsFqBXRkF6UpvXa7pIYhvSSDMp971kcMz9GjkXTwXxg5rRjA&s' }}
+                    />
+                </TouchableOpacity>
             </View>
         );
     }
 
-    _navegar = async (titulo, sinopse, duracao, data, cat, foto, con) => {
+    _navegar = async (titulo, sinopse, duracao, data, cat, foto, con, pValue) => {
         try {
             await AsyncStorage.setItem('@opflix:lancTitulo', titulo);
             await AsyncStorage.setItem('@opflix:lancSinopse', sinopse);
@@ -101,6 +108,15 @@ export default class Lancamentos extends Component {
             await AsyncStorage.setItem('@opflix:lancFoto', foto);
             await AsyncStorage.setItem('@opflix:lancCategoria', cat);
             await AsyncStorage.setItem('@opflix:lancConteudo', con);
+
+
+            if (pValue == undefined) {
+                //console.warn("un")
+                await AsyncStorage.setItem('@opflix:boolFav', "false");
+
+            } else {
+                await AsyncStorage.setItem('@opflix:boolFav', "true");
+            }
 
             // console.warn(await AsyncStorage.getItem('@opflix:lancamento'))
         } catch (error) {
@@ -116,12 +132,15 @@ export default class Lancamentos extends Component {
 
             <View style={styles.divMae}>
                 <ScrollView>
-                <View style={styles.divCat}>
+
+                    <Text style={styles.hMaster}> Lancamentos </Text>
+
+                    <View style={styles.divCat}>
                         <Text style={styles.h1}> Favoritos </Text>
 
                         <FlatList
                             horizontal={true}
-                            data={this.state.favoritosLs.idLancamentoNavigation}
+                            data={this.state.favoritosLs}
                             ListEmptyComponent={this._carregarViewNula()}
                             keyExtractor={item => item.idLancamento}
                             key={item => item.idLancamento}
@@ -132,11 +151,11 @@ export default class Lancamentos extends Component {
                                         <View>
 
                                             <TouchableOpacity
-                                                onPress={() => { this._navegar(item.titulo, item.sinopse, item.duracao, item.dataLancamento, item.idCategoriaNavigation.nome, item.fotoLanc, item.idTipoConteudoNavigation.nome); }}
+                                                onPress={() => { this._navegar(item.idLancamentoNavigation.titulo, item.idLancamentoNavigation.sinopse, item.idLancamentoNavigation.duracao, item.idLancamentoNavigation.dataLancamento, item.idLancamentoNavigation.idCategoriaNavigation.nome, item.idLancamentoNavigation.fotoLanc, item.idLancamentoNavigation.idTipoConteudoNavigation.nome, item.titulo); }}
                                             >
                                                 <Image
                                                     style={styles.img}
-                                                    source={{ uri: item.fotoLanc }}
+                                                    source={{ uri: item.idLancamentoNavigation.fotoLanc }}
                                                 />
                                             </TouchableOpacity>
 
@@ -164,7 +183,7 @@ export default class Lancamentos extends Component {
                                         ({ item }) => (
                                             <View >
                                                 <TouchableOpacity
-                                                    onPress={() => { this._navegar(item.titulo, item.sinopse, item.duracao, item.dataLancamento, item.idCategoriaNavigation.nome, item.fotoLanc, item.idTipoConteudoNavigation.nome); }}
+                                                    onPress={() => { this._navegar(item.titulo, item.sinopse, item.duracao, item.dataLancamento, item.idCategoriaNavigation.nome, item.fotoLanc, item.idTipoConteudoNavigation.nome, item.titulo); }}
                                                 >
                                                     <Image
                                                         style={styles.img}
@@ -201,7 +220,15 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
     },
-    divCat:{
+    hMaster: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 40,
+        textAlign: 'center',
+        paddingBottom: 25,
+        paddingTop: 25
+    },
+    divCat: {
         backgroundColor: '#363D45',
         marginBottom: 20,
         marginTop: 20,

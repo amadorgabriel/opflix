@@ -54,6 +54,8 @@ export default class Cadastro extends Component {
     }
 
     render() {
+        console.disableYellowBox = true;
+        
         return (
             
             <View style={styles.divMae}>

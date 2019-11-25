@@ -26,6 +26,8 @@ export default class Profile extends Component {
     }
 
     componentDidMount() {
+        console.disableYellowBox = true;
+
         this._setarValoresToken();
     }
 
@@ -119,8 +121,7 @@ const styles = StyleSheet.create({
     icon: {
         tintColor: '#fff',
         height: 35,
-        width: 35,
-        
+        width: 35,   
     },
     btnCad: {
         color: '#fff',
