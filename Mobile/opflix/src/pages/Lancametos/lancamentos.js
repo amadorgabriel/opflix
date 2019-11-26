@@ -92,6 +92,7 @@ export default class Lancamentos extends Component {
                 >
                     <Image
                         style={styles.imgBreve}
+                        blurRadius={1}
                         source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeRsFqBXRkF6UpvXa7pIYhvSSDMp971kcMz9GjkXTwXxg5rRjA&s' }}
                     />
                 </TouchableOpacity>
@@ -99,7 +100,7 @@ export default class Lancamentos extends Component {
         );
     }
 
-    _navegar = async (titulo, sinopse, duracao, data, cat, foto, con, pValue) => {
+    _navegar = async (titulo, sinopse, duracao, data, cat, foto, con, pValue, idL) => {
         try {
             await AsyncStorage.setItem('@opflix:lancTitulo', titulo);
             await AsyncStorage.setItem('@opflix:lancSinopse', sinopse);
@@ -108,7 +109,7 @@ export default class Lancamentos extends Component {
             await AsyncStorage.setItem('@opflix:lancFoto', foto);
             await AsyncStorage.setItem('@opflix:lancCategoria', cat);
             await AsyncStorage.setItem('@opflix:lancConteudo', con);
-
+            await AsyncStorage.setItem('@opflix:idLanc', idL.toString());
 
             if (pValue == undefined) {
                 //console.warn("un")
@@ -117,7 +118,7 @@ export default class Lancamentos extends Component {
             } else {
                 await AsyncStorage.setItem('@opflix:boolFav', "true");
             }
-
+            
             // console.warn(await AsyncStorage.getItem('@opflix:lancamento'))
         } catch (error) {
 
@@ -151,7 +152,7 @@ export default class Lancamentos extends Component {
                                         <View>
 
                                             <TouchableOpacity
-                                                onPress={() => { this._navegar(item.idLancamentoNavigation.titulo, item.idLancamentoNavigation.sinopse, item.idLancamentoNavigation.duracao, item.idLancamentoNavigation.dataLancamento, item.idLancamentoNavigation.idCategoriaNavigation.nome, item.idLancamentoNavigation.fotoLanc, item.idLancamentoNavigation.idTipoConteudoNavigation.nome, item.titulo); }}
+                                                onPress={() => { this._navegar(item.idLancamentoNavigation.titulo, item.idLancamentoNavigation.sinopse, item.idLancamentoNavigation.duracao, item.idLancamentoNavigation.dataLancamento, item.idLancamentoNavigation.idCategoriaNavigation.nome, item.idLancamentoNavigation.fotoLanc, item.idLancamentoNavigation.idTipoConteudoNavigation.nome, item.titulo, item.idLancamento); }}
                                             >
                                                 <Image
                                                     style={styles.img}
@@ -183,7 +184,7 @@ export default class Lancamentos extends Component {
                                         ({ item }) => (
                                             <View >
                                                 <TouchableOpacity
-                                                    onPress={() => { this._navegar(item.titulo, item.sinopse, item.duracao, item.dataLancamento, item.idCategoriaNavigation.nome, item.fotoLanc, item.idTipoConteudoNavigation.nome, item.titulo); }}
+                                                    onPress={() => { this._navegar(item.titulo, item.sinopse, item.duracao, item.dataLancamento, item.idCategoriaNavigation.nome, item.fotoLanc, item.idTipoConteudoNavigation.nome, item.titulo, item.idLancamento); }}
                                                 >
                                                     <Image
                                                         style={styles.img}
@@ -260,7 +261,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     icon: {
-        tintColor: '#fff',
+        tintColor: '#631994',
         height: 35,
         width: 35,
 

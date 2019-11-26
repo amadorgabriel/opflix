@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableOpacity, StyleSheet, StatusBar, AsyncStorage, ScrollView, Alert } from 'react-native';
+import { Text, View, Image, TouchableOpacity, StyleSheet, StatusBar, AsyncStorage, ScrollView, Alert, ImageBackground } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 export default class LEscolhido extends Component {
@@ -26,7 +26,7 @@ export default class LEscolhido extends Component {
     componentDidMount() {
         console.disableYellowBox = true;
 
-        this._carregarLancamento();        
+        this._carregarLancamento();
     }
 
     _carregarLancamento = async () => {
@@ -43,11 +43,15 @@ export default class LEscolhido extends Component {
         this.setState({ boolFav: await AsyncStorage.getItem('@opflix:boolFav') })
         this.setState({ idLanc: await AsyncStorage.getItem('@opflix:idLanc') })
 
-         //console.warn("aaaaaaaaa" + await AsyncStorage.getItem('@opflix:idLanc'))
+        //Alert.alert( "IdLanc" + await this.state.idLanc )
     }
 
     _voltarParaLancamentos = () => {
         this.props.navigation.navigate('NavegadorPadrao')
+    }
+
+    _favoritar = (idL) => {
+        Alert.alert("Favoritando .." + idL)
     }
 
     render() {
@@ -55,59 +59,59 @@ export default class LEscolhido extends Component {
         return (
             <View style={styles.divMae} >
                 <ScrollView >
-                    <TouchableOpacity onPress={this._voltarParaLancamentos} >
-                        <Image
-                            onPress={this._voltarParaLancamentos}
-                            style={styles.btnVoltar}
-                            source={require('../../assets/icons/ArrowBack.png')}
-                        />
-                    </TouchableOpacity>
+                        <TouchableOpacity onPress={this._voltarParaLancamentos} >
+                            <Image
+                                onPress={this._voltarParaLancamentos}
+                                style={styles.btnVoltar}
+                                source={require('../../assets/icons/ArrowBack.png')}
+                            />
+                        </TouchableOpacity>
 
-                    <View style={styles.lanc}>
+                        <View style={styles.lanc}>
 
-                        <View style={styles.header}>
-                            <View style={styles.maeTxt}>
-                                <Text style={styles.h1}>{this.state.titulo}</Text>
+                            <View style={styles.header}>
+                                <View style={styles.maeTxt}>
+                                    <Text style={styles.h1}>{this.state.titulo}</Text>
+                                </View>
+
+                                {this.state.boolFav == "false" ? (
+                                    //Favorito
+                                    <Image source={require('../../assets/icons/completo.png')} style={styles.iconFav} />
+
+                                ) : (
+                                        //Favoritar
+                                        <TouchableOpacity
+                                            onPress={() => this._favoritar(this.state.idLanc)
+                                            }>
+                                            <Image source={require('../../assets/icons/vazio.png')} style={styles.iconFav} />
+
+                                        </TouchableOpacity>
+                                    )
+                                }
+
                             </View>
 
-                            {this.state.boolFav == "false" ? (
-                                //Favorito
-                                <Image source={require('../../assets/icons/completo.png')} style={styles.iconFav} />
+                            <View style={styles.box1}>
+                                <View>
+                                    <Image
+                                        style={styles.img}
+                                        source={{ uri: this.state.foto }}
+                                    />
+                                </View>
 
-                            ) : (
-                                    //Favoritar
-                                    <Image source={require('../../assets/icons/vazio.png')} style={styles.iconFav} />
-                                    // <TouchableOpacity
-                                    //     onPress={() => Alert.alert("Favoritado")
-                                    //     }>
-
-                                    // </TouchableOpacity>
-                                )
-                            }
-
-                        </View>
-
-                        <View style={styles.box1}>
-                            <View>
-                                <Image
-                                    style={styles.img}
-                                    source={{ uri: this.state.foto }}
-                                />
+                                <View style={styles.box1Txt}>
+                                    <Text style={styles.text}>Duração: {this.state.duracao} </Text>
+                                    <Text style={styles.text}>Data: {this.state.data} </Text>
+                                    <Text style={styles.text}>Categoria: {this.state.categoria} </Text>
+                                    <Text style={styles.text}>Conteudo: {this.state.conteudo} </Text>
+                                </View>
                             </View>
 
-                            <View style={styles.box1Txt}>
-                                <Text style={styles.text}>Duração: {this.state.duracao} </Text>
-                                <Text style={styles.text}>Data: {this.state.data} </Text>
-                                <Text style={styles.text}>Categoria: {this.state.categoria} </Text>
-                                <Text style={styles.text}>Conteudo: {this.state.conteudo} </Text>
+                            <View style={styles.divMae2}>
+                                <Text style={styles.text}>Sinopse:</Text>
+                                <Text style={styles.text}>{this.state.sinopse} </Text>
                             </View>
                         </View>
-
-                        <View style={styles.divMae2}>
-                            <Text style={styles.text}>Sinopse:</Text>
-                            <Text style={styles.text}>{this.state.sinopse} </Text>
-                        </View>
-                    </View>
                 </ScrollView>
 
             </View>
@@ -123,6 +127,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flex: 1,
         flexDirection: 'column',
+
     },
     divMae2: {
         alignItems: 'center',

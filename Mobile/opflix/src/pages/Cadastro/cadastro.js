@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 export default class Cadastro extends Component {
@@ -55,34 +55,37 @@ export default class Cadastro extends Component {
 
     render() {
         console.disableYellowBox = true;
-        
+
         return (
-            
+
             <View style={styles.divMae}>
 
-                <TouchableOpacity onPress={this._irParaLogin} >
-                    <Image
-                        onPress={this._irParaLogin}
-                        style={styles.btnVoltar}
-                        source={require('../../assets/icons/ArrowBack.png')}
-                    />
-                </TouchableOpacity>
+                {/* <ImageBackground blurRadius={1} source={require('../../assets/fundo.png')} style={{ flex: 1, width: '100%', height: '100%' }}> */}
 
-                <View style={styles.divMae2}>
-                <Text style={styles.h1} >Cadastro</Text>
 
-                <View style={{ marginBottom: 30 }}>
-                    <TextInput placeholderTextColor="#fff" style={styles.input} placeholder="Nome" value={this.state.nome} onChangeText={nome => this.setState({ nome })} />
-                    <TextInput placeholderTextColor="#fff" style={styles.input} placeholder="Email" value={this.state.email} onChangeText={email => this.setState({ email })} />
-                    <TextInput placeholderTextColor="#fff" style={styles.input} placeholder="Senha" value={this.state.senha} onChangeText={senha => this.setState({ senha })} />
-                    <TextInput placeholderTextColor="#fff" style={styles.input} placeholder="Endereço de Imagem Perfil" value={this.state.fotoPerfil} onChangeText={fotoPerfil => this.setState({ fotoPerfil })} />
-                </View>
+                    <TouchableOpacity onPress={this._irParaLogin} >
+                        <Image
+                            onPress={this._irParaLogin}
+                            style={styles.btnVoltar}
+                            source={require('../../assets/icons/ArrowBack.png')}
+                        />
+                    </TouchableOpacity>
 
-                <TouchableOpacity onPress={this._cadastrar} >
-                    <Text style={styles.btnCad}>Cadastrar</Text>
-                </TouchableOpacity>
-                </View>
+                    <View style={styles.divMae2}>
+                        <Text style={styles.h1} >Cadastro</Text>
 
+                        <View style={{ marginBottom: 30 }}>
+                            <TextInput placeholderTextColor="#fff" style={styles.input} placeholder="Nome" value={this.state.nome} onChangeText={nome => this.setState({ nome })} />
+                            <TextInput placeholderTextColor="#fff" style={styles.input} placeholder="Email" value={this.state.email} onChangeText={email => this.setState({ email })} />
+                            <TextInput placeholderTextColor="#fff" secureTextEntry={true} style={styles.input} placeholder="Senha" value={this.state.senha} onChangeText={senha => this.setState({ senha })} />
+                            <TextInput placeholderTextColor="#fff" style={styles.input} placeholder="Endereço de Imagem Perfil" value={this.state.fotoPerfil} onChangeText={fotoPerfil => this.setState({ fotoPerfil })} />
+                        </View>
+
+                        <TouchableOpacity onPress={this._cadastrar} >
+                            <Text style={styles.btnCad}>Cadastrar</Text>
+                        </TouchableOpacity>
+                    </View>
+                {/* </ImageBackground> */}
             </View>
         );
     }
@@ -104,7 +107,7 @@ const styles = StyleSheet.create({
         fontSize: 40,
         textAlign: 'center',
         paddingBottom: 40,
-        paddingTop: 60
+        paddingTop: 30
 
     },
     input: {
@@ -120,13 +123,25 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 20,
         borderColor: '#631994',
-        width: 150,
+        width: 250,
         borderWidth: 3,
-        borderRadius: 50,
+        borderRadius: 5,
+        backgroundColor: '#411061',
         textAlign: 'center',
         fontSize: 23,
-        padding: 6,
+        padding: 10,
         marginBottom: 20
+       
+        // color: '#fff',
+        // fontSize: 20,
+        // borderColor: '#631994',
+        // width: 150,
+        // borderWidth: 3,
+        // borderRadius: 50,
+        // textAlign: 'center',
+        // fontSize: 23,
+        // padding: 6,
+        // marginBottom: 20
     },
     text: {
         color: 'white',

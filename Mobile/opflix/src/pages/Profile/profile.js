@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         paddingBottom: 2
     },
     icon: {
-        tintColor: '#fff',
+        tintColor: '#631994',
         height: 35,
         width: 35,   
     },

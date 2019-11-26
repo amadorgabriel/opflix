@@ -51,10 +51,10 @@ const NavegadorPadrao = createBottomTabNavigator({
         tabBarOptions: {
             showLabel: false,
             showIcon: true,
-            activeBackgroundColor: "#333222",
-            inactiveBackgroundColor: "#222222",
+            activeBackgroundColor: "#363D45",
+            inactiveBackgroundColor: "#363D45",
             activeTintColor:'#fff',
-            inactiveTintColor:'',
+            inactiveTintColor:'#000',
             style: {
                 width: '100%',
                 height: 50

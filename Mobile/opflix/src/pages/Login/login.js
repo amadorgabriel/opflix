@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, StatusBar, AsyncStorage } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, StatusBar, Alert, AsyncStorage, ImageBackground } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 export default class Login extends Component {
@@ -30,11 +30,13 @@ export default class Login extends Component {
                 senha: this.state.senha
             })
         })
-            .then(res => res.json())
-
+            .then(res =>res.json() )
+            //.then(res => { res.status == 200 ? (this.setState({mostrarAviso: ""})) : ( this.setState({mostrarAviso: "Senha ou Email incorreto(os)"}) )})
             //ALTERAR
             .then(data => this._irParaLancamentos(data.token))
             .catch(erro => console.warn('Nao Logado'));
+
+            this.render()
     }
 
     _irParaLancamentos = async (token) => {
@@ -45,7 +47,7 @@ export default class Login extends Component {
                 this.state.mostrarAviso = "";
                 this.props.navigation.navigate('NavegadorPadrao');
             } catch (err) { }
-        }else{
+        } else {
             this.state.mostrarAviso = "Usuário ou senha inválido(as)";
             this.render();
         }
@@ -60,27 +62,31 @@ export default class Login extends Component {
 
         return (
             <View style={styles.divMae}>
+
                 <StatusBar backgroundColor="#631994" barStyle="light-content" />
 
-                <Text style={styles.h1} >Login</Text>
+        
 
-                <View style={{ marginBottom: 30 }}>
-                    <TextInput style={styles.input} placeholderTextColor="#fff" placeholder="Email" value={this.state.email} onChangeText={email => this.setState({ email })} />
-                    <TextInput style={styles.input} secureTextEntry={true} placeholderTextColor="#fff" placeholder="Senha" value={this.state.senha} onChangeText={senha => this.setState({ senha })} />
-                </View>
+                        <Text style={styles.h1} >Login</Text>
 
-                <TouchableOpacity onPress={this._logar} >
-                    <Text style={styles.btnLogar}>Logar</Text>
-                </TouchableOpacity>
+                        <View style={{ marginBottom: 30 }}>
+                            <TextInput style={styles.input} placeholderTextColor="#fff" placeholder="Email" value={this.state.email} onChangeText={email => this.setState({ email })} />
+                            <TextInput style={styles.input} secureTextEntry={true} placeholderTextColor="#fff" placeholder="Senha" value={this.state.senha} onChangeText={senha => this.setState({ senha })} />
+                        </View>
 
-                <TouchableOpacity onPress={this._irParaCadastro}>
-                    <Text style={styles.text} >Não tem uma conta?</Text>
-                    <Text style={styles.text} >Cadastre-se!</Text>
-                </TouchableOpacity>
+                        <TouchableOpacity onPress={this._logar} >
+                            <Text style={styles.btnLogar}>Logar</Text>
+                        </TouchableOpacity>
 
-                <Text style={styles.warning}> {this.state.mostrarAviso} </Text>
+                        <TouchableOpacity  onPress={this._irParaCadastro}>
+                            <Text style={styles.text} >Não tem uma conta?</Text>
+                            <Text style={styles.text} >Cadastre-se!</Text>
+                        </TouchableOpacity>
 
-            </View>
+                        <Text style={styles.warning}> {this.state.mostrarAviso} </Text>
+
+                 </View> 
+           
         );
     }
 }
@@ -88,11 +94,13 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
     divMae: {
         backgroundColor: '#2B3137',
-        flex:1,
+        flex: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         paddingTop: 100
+    },
+    divMae2:{
     },
     h1: {
         color: '#fff',
@@ -111,15 +119,27 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     btnLogar: {
+        // color: '#fff',
+        // fontSize: 20,
+        // borderColor: '#631994',
+        // width: 150,
+        // borderWidth: 3,
+        // borderRadius: 50,
+        // textAlign: 'center',
+        // fontSize: 23,
+        // padding: 6,
+        // marginBottom: 20
+
         color: '#fff',
         fontSize: 20,
         borderColor: '#631994',
-        width: 150,
+        width: 250,
         borderWidth: 3,
-        borderRadius: 50,
+        borderRadius: 5,
+        backgroundColor: '#411061',
         textAlign: 'center',
         fontSize: 23,
-        padding: 6,
+        padding: 10,
         marginBottom: 20
     },
     text: {
@@ -128,9 +148,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     warning: {
-        color: '#631fff',
+        color: 'red',
         textAlign: "center",
         fontSize: 15,
         marginTop: 20
-    }
+    },
+   
 });
