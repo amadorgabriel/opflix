@@ -13,7 +13,7 @@ export default class Login extends Component {
         this.state = {
             mostrarAviso: '',
             //email: 'naruto@uzumaki@gmail.com',
-            email: 'erik@email.com',
+            email: 'y@y.com',
             senha: '123456'
         }
     }

@@ -61,14 +61,14 @@ export default class Lancamentos extends Component {
     _listarCategorias = async () => {
 
         await fetch('http://192.168.4.199:5000/api/Categorias')
-            .then(res => res.json())
-            .then(data => this.setState({ categoriasLs: data }))
+        .then(res => res.json())
+        .then(data => this.setState({ categoriasLs: data }))
         // .catch(err => console.warn(err))
     }
-
+    
     _listarFavoritos = async () => {
         let token = await AsyncStorage.getItem('@opflix:token')
-
+        
         await fetch('http://192.168.4.199:5000/api/Lancamentos/favoritos', {
             method: 'GET',
             headers: {
@@ -77,9 +77,10 @@ export default class Lancamentos extends Component {
                 'Authorization': 'Bearer ' + token,
             }
         })
-            .then(res => res.json())
-            .then(data => this.setState({ favoritosLs: data }))
-            .catch(x => console.warn('não vai listar os favoritos'))
+        .then(res => res.json())
+        .then(data =>  this.setState({ favoritosLs: data }))
+        .catch(x => console.warn('não vai listar os favoritos'))
+
     }
 
     _carregarViewNula = () => {
@@ -129,6 +130,7 @@ export default class Lancamentos extends Component {
     }
 
     render() {
+
         return (
 
             <View style={styles.divMae}>
@@ -141,7 +143,7 @@ export default class Lancamentos extends Component {
 
                         <FlatList
                             horizontal={true}
-                            data={this.state.favoritosLs}
+                            data={this.state.favoritosLs }
                             ListEmptyComponent={this._carregarViewNula()}
                             keyExtractor={item => item.idLancamento}
                             key={item => item.idLancamento}
