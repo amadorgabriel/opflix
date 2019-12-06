@@ -22,13 +22,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\" : \"f@f.com\",\n\t\"senha\" : \"789789\"\n}"
+							"raw": "{\n\t\"email\" : \"erik@email.com\",\n\t\"senha\" : \"123456\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Login",
+							"raw": "http://192.168.4.199:5000/api/Login",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -61,10 +64,13 @@
 							"raw": "{\n\t\"nome\" : \"Anonimus\",\n\t\"email\" : \"anonimus@anonimus.com\",\n\t\"senha\" : \"Anonimus\",\n\t\"idPerfil\" : 2,\n\t\"fotoPerfil\" : \"https://img.ibxk.com.br/2017/06/22/22100428046161.jpg?w=1120&h=420&mode=crop&scale=both\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Usuarios",
+							"raw": "http://192.168.4.199:5000/api/Usuarios",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -102,10 +108,13 @@
 							"raw": "{\n\t\"nome\" : \"Froid\",\n\t\"email\" : \"f@f.com\",\n\t\"senha\" : \"789789\",\n\t\"idPerfil\" : 1,\n\t\"fotoPerfil\" : \"https://img.ibxk.com.br/2017/06/22/22100428046161.jpg?w=1120&h=420&mode=crop&scale=both\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Usuarios/cadastrar/admin",
+							"raw": "http://192.168.4.199:5000/api/Usuarios/cadastrar/admin",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -131,7 +140,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYUBlbWFpbC5jb20iLCJqdGkiOiIyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE1NjgwNzkyMjAsImlzcyI6Ik9wRmxpeC5XZWJBcGkiLCJhdWQiOiJPcEZsaXguV2ViQXBpIn0.qTsr00aZYMiXCxmU4hXrJl-FyiDqHQCATG50MoznRn8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVyaWtAZW1haWwuY29tIiwianRpIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNTY4NTYzMTQxLCJpc3MiOiJPcEZsaXguV2ViQXBpIiwiYXVkIjoiT3BGbGl4LldlYkFwaSJ9.OiFT3IsSA-vEUYqVUU4l9UAsDPfB9NmWhUSeU_TeQUs",
 									"type": "string"
 								}
 							]
@@ -139,10 +148,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/Lancamentos",
+							"raw": "http://192.168.4.199:5000/api/Lancamentos",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -156,6 +168,16 @@
 				{
 					"name": "Lancamentos.Cadastrar",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVyaWtAZW1haWwuY29tIiwianRpIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNTY4NTYyNDIzLCJpc3MiOiJPcEZsaXguV2ViQXBpIiwiYXVkIjoiT3BGbGl4LldlYkFwaSJ9.nTTV4tV8oQFF_vd_mX54Ppfruon76Q4SB0ZkBD7v6Lo",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -167,13 +189,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"dataLancamento\": \"2001-02-22T00:00:00\",\r\n\t\"duracao\": \"02:15:17\",\r\n\t\"titulo\": \"Minha vida engraçada\",\r\n\t\"sinopse\": \"Um cara com uma vida engraçada, ao ponto de compartilhar a dor do personagem e chorar junto\",\r\n\t\"idCategoria\": 5,\r\n\t\"idTipoConteudo\": 1\r\n}"
+							"raw": "{\r\n\t\"dataLancamento\": \"2003-09-25T00:00:00\",\r\n\t\"duracao\": \"02:15:17\",\r\n\t\"titulo\": \"Se eu fosse você\",\r\n\t\"sinopse\": \"Amor, love e deixa a vida me levar\",\r\n\t\"idCategoria\": 2,\r\n\t\"idTipoConteudo\": 1\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Lancamentos",
+							"raw": "http://192.168.4.199:5000/api/Lancamentos",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -201,10 +226,13 @@
 							"raw": "{\r\n\t\"dataLancamento\": \"2001-02-22T00:00:00\",\r\n\t\"duracao\": \"02:15:17\",\r\n\t\"titulo\": \"Minha sdfdf\",\r\n\t\"sinopse\": \"Um cara sdfma vida engraçada, ao ponto de compartilhar a dor do personagem e chorar junto\",\r\n\t\"idCategoria\": 5,\r\n\t\"idTipoConteudo\": 1\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Lancamentos/1003",
+							"raw": "http://192.168.4.199:5000/api/Lancamentos/1003",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -222,10 +250,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/Lancamentos/1003",
+							"raw": "http://192.168.4.199:5000/api/Lancamentos/1003",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -253,10 +284,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/Lancamentos/favoritos",
+							"raw": "http://192.168.4.199:5000/api/Lancamentos/favoritos",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -274,10 +308,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/Lancamentos/filtrarData/ASC",
+							"raw": "http://192.168.4.199:5000/api/Lancamentos/filtrarData/ASC",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -296,10 +333,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/Lancamentos/filtrarPlataforma/netflix",
+							"raw": "http://192.168.4.199:5000/api/Lancamentos/filtrarPlataforma/netflix",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -328,10 +368,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/Lancamentos/favoritar/5",
+							"raw": "http://192.168.4.199:5000/api/Lancamentos/favoritar/5",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -355,10 +398,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/Categorias",
+							"raw": "http://192.168.4.199:5000/api/Categorias",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -386,10 +432,13 @@
 							"raw": "{\r\n\t\"nome\": \"Animação\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Categorias",
+							"raw": "http://192.168.4.199:5000/api/Categorias",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -417,10 +466,13 @@
 							"raw": "{\r\n\t\"nome\": \"Animação - Curta Metragem\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Categorias/1002",
+							"raw": "http://192.168.4.199:5000/api/Categorias/1002",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -443,10 +495,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/Plataformas",
+							"raw": "http://192.168.4.199:5000/api/Plataformas",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -474,10 +529,13 @@
 							"raw": "    {\r\n        \"nome\": \"YouTube\"\r\n    }"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Plataformas",
+							"raw": "http://192.168.4.199:5000/api/Plataformas",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -505,10 +563,13 @@
 							"raw": "{\n\t\"nome\" : \"Youtube\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/Plataformas/1002",
+							"raw": "http://192.168.4.199:5000/api/Plataformas/1002",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"4",
+								"199"
 							],
 							"port": "5000",
 							"path": [
@@ -521,6 +582,74 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Localizacoes",
+			"item": [
+				{
+					"name": "Localizacoes.Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\" : \"O Homem Formiga\",\n\t\"latitude\" : \"-8.0622236\",\t\n\t\"longitude\": \"-34.8840818\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.4.199:5000/api/Localizacoes",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"4",
+								"199"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Localizacoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Localizacoes.Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.4.199:5000/api/Localizacoes",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"4",
+								"199"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Localizacoes"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	]
 }

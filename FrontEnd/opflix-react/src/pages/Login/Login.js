@@ -70,7 +70,7 @@ export default class Login extends Component {
         event.preventDefault();
 
         Axios.post(
-            'http://localhost:5000/api/Login',
+            'http://192.168.4.199:5000/api/Login',
             {
                 email: this.state.emailLogin,
                 senha: this.state.senhaLogin
@@ -116,7 +116,7 @@ export default class Login extends Component {
         }
 
         Axios.post(
-            'http://localhost:5000/api/Usuarios',
+            'http://192.168.4.199:5000/api/Usuarios',
             {
                 nome: this.state.NomeCad,
                 email: this.state.EmailCad,

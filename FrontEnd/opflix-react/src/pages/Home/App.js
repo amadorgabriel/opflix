@@ -52,7 +52,7 @@ export default class App extends Component {
     //     this.setState({ listaLancamentos: res })
     //   })
 
-    fetch('http://localhost:5000/api/Lancamentos', {
+    fetch('http://192.168.4.199:5000/api/Lancamentos', {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ export default class App extends Component {
     };
 
     Axios.get(
-      'http://localhost:5000/api/Categorias',
+      'http://192.168.4.199:5000/api/Categorias',
       config
     ).then((response) => {
       this.setState({ listaCategorias: response.data })
@@ -92,7 +92,7 @@ export default class App extends Component {
   filtrarPorCategoria = (event) => {
     //console.log(event.target.value);
 
-    fetch('http://localhost:5000/api/Lancamentos/filtrarCategoria/' + event.target.value)
+    fetch('http://192.168.4.199:5000/api/Lancamentos/filtrarCategoria/' + event.target.value)
       .then(data => data.json())
       .then(res => { this.setState({ listaLancamentos: res }) })
     //.catch(erro => alert('Erro:' + erro))
@@ -102,7 +102,7 @@ export default class App extends Component {
 
   ordenarPorData = (event) => {
     //console.log(event.target.value)
-    fetch('http://localhost:5000/api/Lancamentos/filtrarData/' + event.target.value)
+    fetch('http://192.168.4.199:5000/api/Lancamentos/filtrarData/' + event.target.value)
       .then(data => data.json())
       .then(res => { this.setState({ listaLancamentos: res }) })
     // .catch(erro => alert('Erro:' + erro))
@@ -114,7 +114,7 @@ export default class App extends Component {
     };
 
     Axios.get(
-      'http://localhost:5000/api/Lancamentos/favoritos',
+      'http://192.168.4.199:5000/api/Lancamentos/favoritos',
       config
     ).then((response) => {
       this.setState({ listaLancamentos: response.data })
@@ -132,7 +132,7 @@ export default class App extends Component {
     var idBtn = event.target.value;
 
     Axios.get(
-      'http://localhost:5000/api/Lancamentos/favoritar/' + event.target.value,
+      'http://192.168.4.199:5000/api/Lancamentos/favoritar/' + event.target.value,
       config
     )
       .then(data => {

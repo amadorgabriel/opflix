@@ -59,7 +59,7 @@ export default class Login extends Component {
         };
 
         Axios.get(
-            'http://localhost:5000/api/Lancamentos',
+            'http://192.168.4.199:5000/api/Lancamentos',
             config
         ).then((response) => {
             this.setState({ listaLancamentos: response.data })
@@ -72,7 +72,7 @@ export default class Login extends Component {
         };
 
         Axios.get(
-            'http://localhost:5000/api/Plataformas',
+            'http://192.168.4.199:5000/api/Plataformas',
             config
         ).then((response) => {
             this.setState({ listaPlataformas: response.data })
@@ -86,7 +86,7 @@ export default class Login extends Component {
         };
 
         Axios.get(
-            'http://localhost:5000/api/Categorias',
+            'http://192.168.4.199:5000/api/Categorias',
             config
         ).then((response) => {
             this.setState({ listaCategorias: response.data })
@@ -175,7 +175,7 @@ export default class Login extends Component {
 
         if (this.state.idLancAtualizar == "") {
 
-            fetch('http://localhost:5000/api/Lancamentos', {
+            fetch('http://192.168.4.199:5000/api/Lancamentos', {
                 method: "POST",
                 body: JSON.stringify({
                     dataLancamento: this.state.dataL,
@@ -222,7 +222,7 @@ export default class Login extends Component {
             urlFoto = this.state.UrlCad;
         }
 
-        fetch('http://localhost:5000/api/Usuarios/cadastrar/admin', {
+        fetch('http://192.168.4.199:5000/api/Usuarios/cadastrar/admin', {
             method: "POST",
             body: JSON.stringify({
                 nome: this.state.NomeCad,
@@ -258,7 +258,7 @@ export default class Login extends Component {
 
         if (this.state.idPlataformaAtualizar == "") {
 
-            fetch('http://localhost:5000/api/Plataformas', {
+            fetch('http://192.168.4.199:5000/api/Plataformas', {
                 method: "POST",
                 body: JSON.stringify({
                     nome: this.state.nomePlatCad
@@ -289,7 +289,7 @@ export default class Login extends Component {
 
         if (this.state.idCategoriaAtualizar == "") {
 
-            fetch('http://localhost:5000/api/Categorias', {
+            fetch('http://192.168.4.199:5000/api/Categorias', {
                 method: "POST",
                 body: JSON.stringify({
                     nome: this.state.nomeCatCad
@@ -323,7 +323,7 @@ export default class Login extends Component {
     AtualizarPlataforma = (event) => {
         event.preventDefault();
 
-        var url = 'http://localhost:5000/api/Plataformas/' + this.state.idPlataformaAtualizar;
+        var url = 'http://192.168.4.199:5000/api/Plataformas/' + this.state.idPlataformaAtualizar;
 
         if (this.state.idPlataformaAtualizar != null && this.state.nomePlatCad != "") {
             fetch(url,
@@ -355,7 +355,7 @@ export default class Login extends Component {
     AtualizarCategoria = (event) => {
         event.preventDefault();
 
-        var url = 'http://localhost:5000/api/Categorias/' + this.state.idCategoriaAtualizar;
+        var url = 'http://192.168.4.199:5000/api/Categorias/' + this.state.idCategoriaAtualizar;
 
         if (this.state.idCategoriaAtualizar != null && this.state.nomeCatCad != "") {
 
@@ -389,7 +389,7 @@ export default class Login extends Component {
     AtualizarLancamento = (event) => {
         event.preventDefault();
 
-        var url = 'http://localhost:5000/api/Lancamentos/' + this.state.idLancAtualizar;
+        var url = 'http://192.168.4.199:5000/api/Lancamentos/' + this.state.idLancAtualizar;
 
         if (this.state.idLancAtualizar != '') {
 
