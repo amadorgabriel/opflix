@@ -232,7 +232,7 @@ export default class App extends Component {
                     <article className="infoFilmes">
                       <h3>{(element.titulo != null) ? element.titulo : element.idLancamentoNavigation.titulo}</h3>
                       <p>
-                        <strong className="strg">Snopse:</strong>
+                        <strong className="strg">Sinopse:</strong>
                         {(element.sinopse != null) ? element.sinopse : element.idLancamentoNavigation.sinopse}
                       </p>
                       <p>

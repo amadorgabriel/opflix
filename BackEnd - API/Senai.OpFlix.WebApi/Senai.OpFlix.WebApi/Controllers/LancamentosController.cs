@@ -105,7 +105,7 @@ namespace Senai.OpFlix.WebApi.Controllers
 
                 if (listaLancamentos == null || listaLancamentos.Count == 0)
                 {
-                    return NotFound(new { mensagem = "Desculpe, seu usuário não possui algum favorito" });
+                    return NotFound(listaLancamentos);
                 }
                 return Ok(listaLancamentos);
 

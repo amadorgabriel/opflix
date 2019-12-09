@@ -21,6 +21,15 @@ body{
     justify-content: center;
 }
 
+.mainLoc{
+    padding-top: 5em;
+    background-color:black;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .sectionMae{
     font-family: 'Bebas Neue';

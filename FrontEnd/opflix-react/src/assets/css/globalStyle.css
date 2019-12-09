@@ -21,6 +21,18 @@
     margin-bottom: 2em;
 }
 
+.a {
+    background-color:black;
+    
+}
+
+.a a{
+    color:white;
+    font-size: 30;
+    margin: 10 10 10 10;
+    
+}
+
 .thumbnail{
     border-radius: 100%;
     width: 50px;

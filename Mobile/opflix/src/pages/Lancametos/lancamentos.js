@@ -30,7 +30,7 @@ export default class Lancamentos extends Component {
     }
 
     componentDidMount() {
-        console.disableYellowBox = true;
+        // console.disableYellowBox = true;
 
         this._listarLancamentos();
         this._listarCategorias();
@@ -61,14 +61,14 @@ export default class Lancamentos extends Component {
     _listarCategorias = async () => {
 
         await fetch('http://192.168.4.199:5000/api/Categorias')
-        .then(res => res.json())
-        .then(data => this.setState({ categoriasLs: data }))
+            .then(res => res.json())
+            .then(data => this.setState({ categoriasLs: data }))
         // .catch(err => console.warn(err))
     }
-    
+
     _listarFavoritos = async () => {
         let token = await AsyncStorage.getItem('@opflix:token')
-        
+
         await fetch('http://192.168.4.199:5000/api/Lancamentos/favoritos', {
             method: 'GET',
             headers: {
@@ -77,9 +77,9 @@ export default class Lancamentos extends Component {
                 'Authorization': 'Bearer ' + token,
             }
         })
-        .then(res => res.json())
-        .then(data =>  this.setState({ favoritosLs: data }))
-        .catch(x => console.warn('não vai listar os favoritos'))
+            .then(res => res.json())
+            .then(data => this.setState({ favoritosLs: data }))
+            .catch(x => console.warn('não vai listar os favoritos'))
 
     }
 
@@ -119,7 +119,7 @@ export default class Lancamentos extends Component {
             } else {
                 await AsyncStorage.setItem('@opflix:boolFav', "true");
             }
-            
+
             // console.warn(await AsyncStorage.getItem('@opflix:lancamento'))
         } catch (error) {
 
@@ -140,10 +140,9 @@ export default class Lancamentos extends Component {
 
                     <View style={styles.divCat}>
                         <Text style={styles.h1}> Favoritos </Text>
-
                         <FlatList
                             horizontal={true}
-                            data={this.state.favoritosLs }
+                            data={this.state.favoritosLs}
                             ListEmptyComponent={this._carregarViewNula()}
                             keyExtractor={item => item.idLancamento}
                             key={item => item.idLancamento}
