@@ -4,12 +4,14 @@ import CadastroScreen from '../src/pages/Cadastro/cadastro';
 import LancamentosScreen from '../src/pages/Lancametos/lancamentos'
 import ProfileScreen from '../src/pages/Profile/profile'
 import LancamentoEscolhidoScreen from '../src/pages/Lancametos/LancamentoEscolhido';
+import MapasScreen from '../src/pages/Mapa/Mapa.js'
 
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Alert, AsyncStorage } from 'react-native';
 import jwt_decode from 'jwt-decode';
+import Mapa from '../src/pages/Mapa/Mapa.js';
 
 
 
@@ -25,10 +27,10 @@ const EscolhidoStack = createStackNavigator({
     LancamentoEscolhido:  {screen: LancamentoEscolhidoScreen}
 });
 
-
 const NavegadorPadrao = createBottomTabNavigator({
     Lancamentos: { screen: LancamentosScreen },
     ProfileScreen: { screen: ProfileScreen },
+    MapasScreen: { screen: Mapa },
     // Logout: {
     //     screen: LogoutScreen   //  Empty screen, useless in this specific case
     //     , navigationOptions: ({ navigation }) => ({
