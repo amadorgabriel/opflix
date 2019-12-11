@@ -23,7 +23,6 @@ export class MapContainer extends Component {
             showingInfoWindow: false,
             activeMarker: {},
             selectedPlace: {},
-
         }
     }
 
@@ -33,7 +32,6 @@ export class MapContainer extends Component {
             activeMarker: marker,
             showingInfoWindow: true
         });
-
 
 
     componentDidMount() {
@@ -70,18 +68,15 @@ export class MapContainer extends Component {
                     >
 
                         {this.state.listaLugares.map(x => {
-
                             return (
-
                                 <Marker
-                                onMouseover={this.onMarkerClick}
+                                    onMouseover={this.onMarkerClick}
                                     title={x.nome}
                                     name={x.nome}
                                     position={{ lat: x.latitude, lng: x.longitude }} />
-
                             );
                         })}
-
+                        
                         <InfoWindow
                             marker={this.state.activeMarker}
                             visible={this.state.showingInfoWindow}>

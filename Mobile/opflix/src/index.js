@@ -30,7 +30,7 @@ const EscolhidoStack = createStackNavigator({
 const NavegadorPadrao = createBottomTabNavigator({
     Lancamentos: { screen: LancamentosScreen },
     ProfileScreen: { screen: ProfileScreen },
-    MapasScreen: { screen: Mapa },
+    // MapasScreen: { screen: Mapa },
     // Logout: {
     //     screen: LogoutScreen   //  Empty screen, useless in this specific case
     //     , navigationOptions: ({ navigation }) => ({
