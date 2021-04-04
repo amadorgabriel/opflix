@@ -121,19 +121,15 @@ export default class Login extends Component {
         this.setState({ nomeAdmin: nomeAdmin })
     }
     ValorSnopse = (event) => {
-        // console.log(event.target.value);
         this.setState({ sinopse: event.target.value })
     }
     ValorTitulo = (event) => {
-        // console.log(event.target.value);
         this.setState({ tituloL: event.target.value })
     }
     ValorDuracao = (event) => {
-        // console.log(event.target.value);
         this.setState({ duracao: event.target.value })
     }
     ValorData = (event) => {
-        // console.log(event.target.value);
         this.setState({ dataL: event.target.value })
     }
     ValorFoto = (event) => {
@@ -148,23 +144,18 @@ export default class Login extends Component {
     }
     ValorNomeCatCad = (event) => {
         this.setState({ nomeCatCad: event.target.value })
-        // console.log(event.target.value)
     }
     ValorNomePlatCad = (event) => {
         this.setState({ nomePlatCad: event.target.value })
-        // console.log(event.target.value)
     }
     ValorIdPlat = (event) => {
         this.setState({ idPlataformaAtualizar: event.target.value })
-        // console.log(event.target.value)
     }
     ValorIdCat = (event) => {
         this.setState({ idCategoriaAtualizar: event.target.value })
-        //console.log(event.target.value)
     }
     ValorIdLanc = (event) => {
         this.setState({ idLancAtualizar: event.target.value })
-        // console.log(event.target.value)
     }
 
 
