@@ -1,13 +1,8 @@
 <p align="center" >
   <img align="center" width="200px" src="https://i.pinimg.com/originals/9a/a9/2e/9aa92e8307d1314b1c2c65a39e0d0984.png?epik=dj0yJnU9UllTMHA2OVVwRlltdmtkVDQ5LUdFVlo0VElJTUdzU2gmcD0wJm49bTgzTDNKSjhKWktDaVRqU19aTUI0dyZ0PUFBQUFBR0FOcGVR" />
-
-  <h1 align="center"> :cd: Lançamentos de Filmes e Séries :cd: <h1/>
 </p>
 
-<p align="center" >
-  <img align="center" src="https://img.shields.io/github/last-commit/amador2014/Opflix-Filmes-e-Series">
-  <img align="center" src="https://img.shields.io/github/license/amador2014/Opflix-Filmes-e-Series" />
-</p>
+<br />
   
 <p align="center">
   <img align="center" src="https://img.shields.io/badge/stack-ReactJs-blue" />
@@ -21,13 +16,11 @@
 
 Aplicação Web/Mobile para lançamento de filmes e séries 
 
-- :heavy_check_mark: Aplicação Web ([React](https://reactjs.org/));
-- :heavy_check_mark: Mobile ([React Native](https://reactnative.dev));
-- :heavy_check_mark: API ([ASP.NET C#](https://dotnet.microsoft.com/apps/aspnet));
-- :heavy_check_mark: Integração de bancos relacionais ([SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-2019)). 
-- :heavy_check_mark: Integração de bancos não relacionais ([MongoDB](https://www.mongodb.org/)). 
-
-
+- Aplicação Web ([React](https://reactjs.org/));
+- Mobile ([React Native](https://reactnative.dev));
+- API ([ASP.NET C#](https://dotnet.microsoft.com/apps/aspnet));
+- Integração de bancos relacionais ([SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-2019)). 
+- Integração de bancos não relacionais ([MongoDB](https://www.mongodb.org/)). 
 
 ## :gear: Funcionalidades 
 
